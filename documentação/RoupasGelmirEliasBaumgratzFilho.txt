@@ -1,0 +1,13 @@
+Tema: Loja de Roupas
+
+Possíveis telas: 
+- Tela principal da loja (quando acessa o link é a primeira página, mostra as roupas em destaque)
+(terá um botão que rediceriona para a tela de login);
+- Tela de login comprador (terá um botão que redireciona para tela de criar um cadastro, caso ainda não tenha);
+- Tela de cadastro comprador (email, cpf, nome, sobrenome, data de nascimento, senha, e telefone);
+- Tela roupas masculinas (destaque e todas as roupas masculinas disponíveis);
+- Tela roupas femininas (destaque e todas as roupas femininas disponíveis);
+- Tela roupa infantil (destaque e toda roupa infantil disponível);
+- Tela de sacola (mostra todos as roupas selecionas para a compra);
+- Tela para finalizar a compra (colocar os dados bancários);
+- Central de atendimento (perguntas frequentes);
