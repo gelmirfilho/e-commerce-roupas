@@ -3,9 +3,9 @@ package br.com.roupas.model;
 public enum TipoUsuario {
 	
 	NAO_DEFINIDO(0, "Selecione um tipo..."),
-	ADMINISTRADOR(1, "Adminstrador"), 
+	CLIENTE(1, "Cliente"),
 	FUNCIONARIO(2, "Funcionário"),
-	CLIENTE(3, "Cliente");
+	ADMINISTRADOR(3, "Adminstrador");
 	
 	private int id;
 	private String label;

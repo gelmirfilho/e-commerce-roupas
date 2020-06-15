@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-	<title>Cadastro de Usuário</title>
-</h:head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">	
 <h:body>
 	<h:messages errorStyle="color:red" warnStyle="color:orange"
 		infoStyle="color:green" globalOnly="true" />
 
-	<h1>.:Cadastro de Usuário:.</h1>
+	<h1>.:Gerenciador de Usuário:.</h1>
+	<h1>Somente pessoas autorizadas</h1>
 	<h:form>
 		<h:panelGrid columns="2">
 
@@ -17,7 +19,7 @@
 			<h:panelGroup>
 				<h:inputText id="itEmail" required="true"
 					requiredMessage="Esse campo não pode ser nulo."
-					value="#{cadastroController.entity.email}" />
+					value="#{cadastroAdministradorController.entity.email}" />
 				<h:message for="itEmail" style="color:red" />
 			</h:panelGroup>
 
@@ -26,7 +28,7 @@
 			<h:panelGroup>
 				<h:inputText id="itCpf" required="true"
 					requiredMessage="Esse campo não pode ser nulo."
-					value="#{cadastroController.entity.cpf}" />
+					value="#{cadastroAdministradorController.entity.cpf}" />
 				<h:message for="itCpf" style="color:red" />
 			</h:panelGroup>
 
@@ -34,7 +36,7 @@
 			<h:panelGroup>
 				<h:inputText id="itNome" required="true"
 					requiredMessage="Esse campo não pode ser nulo."
-					value="#{cadastroController.entity.nome}" />
+					value="#{cadastroAdministradorController.entity.nome}" />
 				<h:message for="itNome" style="color:red" />
 			</h:panelGroup>
 
@@ -42,14 +44,14 @@
 			<h:panelGroup>
 				<h:inputText id="itSobrenome" required="true"
 					requiredMessage="Esse campo não pode ser nulo."
-					value="#{cadastroController.entity.sobrenome}" />
+					value="#{cadastroAdministradorController.entity.sobrenome}" />
 				<h:message for="itSobrenome" style="color:red" />
 			</h:panelGroup>
 
 			<h:outputLabel value="Data de Nascimento:" />
 			<h:panelGroup>
 				<h:inputText id="itDataNascimento"
-					value="#{cadastroController.entity.dataNascimento}">
+					value="#{cadastroAdministradorController.entity.dataNascimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
 				</h:inputText>
 				<h:message for="itDataNascimento" style="color:red" />
@@ -58,7 +60,7 @@
 			<h:outputLabel value="Senha:" />
 			<h:panelGroup>
 				<h:inputSecret id="itSenha"
-					value="#{cadastroController.entity.senha}" required="true"
+					value="#{cadastroAdministradorController.entity.senha}" required="true"
 					requiredMessage="Esse campo não pode ser nulo." />
 				<h:message for="itSenha" style="color:red" />
 			</h:panelGroup>
@@ -66,40 +68,36 @@
 			<h:outputLabel value="Telefone:" />
 			<h:panelGroup>
 				<h:inputText id="itTelefone"
-					value="#{cadastroController.entity.telefone}" required="true"
+					value="#{cadastroAdministradorController.entity.telefone}" required="true"
 					requiredMessage="Esse campo não pode ser nulo." />
 				<h:message for="itTelefone" style="color:red" />
 			</h:panelGroup>
 
 			<h:outputLabel value="Tipo de Usuário:" />
-			<h:selectOneMenu value="#{cadastroController.entity.tipoUsuario}">
-				<f:selectItems value="#{cadastroController.listaTipoUsuario}"
+			<h:selectOneMenu value="#{cadastroAdministradorController.entity.tipoUsuario}">
+				<f:selectItems value="#{cadastroAdministradorController.listaTipoUsuario}"
 					var="tipo" itemLabel="#{tipo.label}" />
 			</h:selectOneMenu>
 
 		</h:panelGrid>
 		<h:commandButton value="Incluir"
-			disabled="#{cadastroController.entity.id != null}"
-			actionListener="#{cadastroController.incluir}" />
+			disabled="#{cadastroAdministradorController.entity.id != null}"
+			actionListener="#{cadastroAdministradorController.incluir}" />
 		<h:commandButton value="Alterar"
-			disabled="#{cadastroController.entity.id == null}"
-			actionListener="#{cadastroController.alterar}" />
+			disabled="#{cadastroAdministradorController.entity.id == null}"
+			actionListener="#{cadastroAdministradorController.alterar}" />
 		<h:commandButton value="Excluir"
-			disabled="#{cadastroController.entity.id == null}"
-			actionListener="#{cadastroController.remover}">
+			disabled="#{cadastroAdministradorController.entity.id == null}"
+			actionListener="#{cadastroAdministradorController.remover}">
 			<f:ajax execute="@this" render="@form formDataTable" />
 		</h:commandButton>
 		<h:commandButton value="Limpar"
-			actionListener="#{cadastroController.limpar}">
+			actionListener="#{cadastroAdministradorController.limpar}">
 			<f:ajax execute="@this" render="@form" />
-		</h:commandButton>
-		<h:commandButton value="Fazer login"
-			action="login.xhtml?faces-redirect=true">
-			<f:ajax execute="@this" render="@form messages" />
 		</h:commandButton>
 	</h:form>
 	<h:form id="formDataTable">
-		<h:dataTable id="dataTable" value="#{cadastroController.listaUsuario}"
+		<h:dataTable id="dataTable" value="#{cadastroAdministradorController.listaUsuario}"
 			var="obj">
 
 			<h:column>
@@ -152,10 +150,12 @@
 			<h:column>
 				<f:facet name="header">Ação</f:facet>
 				<h:commandLink value="Editar"
-					actionListener="#{cadastroController.editar(obj)}" />
+					actionListener="#{cadastroAdministradorController.editar(obj)}" />
 			</h:column>
 
 		</h:dataTable>
 	</h:form>
 </h:body>
+</ui:define>
+</ui:composition>
 </html>

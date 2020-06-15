@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-	<title>LOJA DE ROUPAS</title>
-</h:head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">	
 <h:body>
 	<h:messages style="color:red;margin:8px;" />
 	<h:form>
@@ -12,10 +13,8 @@
 			<h:outputLabel value="LOJA DE ROUPAS" />
 			<h:outputLabel value="LOGIN APROVADO COM SUCESSO" />
 		</h:panelGrid>
-		<h:commandButton value="Deslogar"
-			action="login.xhtml?faces-redirect=true">
-			<f:ajax execute="@this" render="@form messages" />
-		</h:commandButton>
 	</h:form>
 </h:body>
+</ui:define>
+</ui:composition>
 </html>

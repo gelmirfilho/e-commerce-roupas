@@ -33,9 +33,8 @@ public abstract class Controller <T extends Entity<T>> implements Serializable {
 				Util.addInfoMessage("Erro ao incluir no banco de dados.");
 			}
 		}
-		
 	}
-
+	
 	public void alterar() {
 		if (validarDados()) {		
 			if (dao.update(getEntity())) {

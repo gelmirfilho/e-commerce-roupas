@@ -3,6 +3,7 @@ package br.com.roupas.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import br.com.roupas.application.Session;
 import br.com.roupas.application.Util;
 import br.com.roupas.dao.UsuarioDAO;
 import br.com.roupas.model.Usuario;
@@ -18,8 +19,12 @@ public class LoginController {
 		Usuario usuario = dao.verificarLoginSenha(getUsuario().getEmail(),
 				Util.hashSHA256(getUsuario().getSenha()));
 		
-		if (usuario != null)
-			return "teste.xhtml?faces-redirect=true";
+		if (usuario != null) {
+			// adicionando um ussuario na sessao
+			Session.getInstance().setAttribute("usuarioLogado", usuario);
+			// redirecionando para o template
+			return "home.xhtml?faces-redirect=true";
+		}
 		Util.addErrorMessage("Login ou Senha inválido.");
 		return "";
 	}

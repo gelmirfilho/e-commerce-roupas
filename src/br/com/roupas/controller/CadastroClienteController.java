@@ -13,13 +13,13 @@ import br.com.roupas.model.Usuario;
 
 @Named
 @ViewScoped
-public class CadastroController extends Controller<Usuario> implements Serializable {
+public class CadastroClienteController extends Controller<Usuario> implements Serializable {
 
 	private static final long serialVersionUID = -563227102506849534L;
 
 	private List<Usuario> listaUsuario;
 	
-	public CadastroController() {
+	public CadastroClienteController() {
 		super(new UsuarioDAO());
 	}
 	
@@ -60,7 +60,9 @@ public class CadastroController extends Controller<Usuario> implements Serializa
 	}
 
 	public TipoUsuario[] getListaTipoUsuario() {
-		return TipoUsuario.values();
+		TipoUsuario[] vetor = new TipoUsuario[1];
+		vetor[0] = TipoUsuario.CLIENTE;
+		return vetor;
 	}
 
 }

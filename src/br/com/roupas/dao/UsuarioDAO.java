@@ -27,7 +27,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		try {
 			stat = conn.prepareStatement(sql.toString());
 			stat.setString(1, usuario.getEmail());
-			stat.setString(2, usuario.getCpf());
+			stat.setString(2, usuario.getCpf().replaceAll("\\.", "").replaceAll("-", ""));
 			stat.setString(3, usuario.getNome());
 			stat.setString(4, usuario.getSobrenome());
 			stat.setDate(5, java.sql.Date.valueOf(usuario.getDataNascimento()));
@@ -68,7 +68,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		try {
 			stat = conn.prepareStatement(sql.toString());
 			stat.setString(1, usuario.getEmail());
-			stat.setString(2, usuario.getCpf());
+			stat.setString(2, usuario.getCpf().replaceAll("\\.", "").replaceAll("-", ""));
 			stat.setString(3, usuario.getNome());
 			stat.setString(4, usuario.getSobrenome());
 			stat.setDate(5, java.sql.Date.valueOf(usuario.getDataNascimento()));

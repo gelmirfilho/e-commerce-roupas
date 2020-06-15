@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<h:body>
+			<h:messages errorStyle="color:red" warnStyle="color:orange"
+				infoStyle="color:green" globalOnly="true" />
+
+			<h1>.:Criar Nova Conta:.</h1>
+			<h:form>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="Email:" />
+					<h:panelGroup>
+						<h:inputText id="itEmail" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroClienteController.entity.email}" />
+						<h:message for="itEmail" style="color:red" />
+					</h:panelGroup>
+
+
+					<h:outputLabel value="Cpf:" />
+					<h:panelGroup>
+						<h:inputText id="itCpf" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroClienteController.entity.cpf}" />
+						<h:message for="itCpf" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Nome:" />
+					<h:panelGroup>
+						<h:inputText id="itNome" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroClienteController.entity.nome}" />
+						<h:message for="itNome" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Sobrenome:" />
+					<h:panelGroup>
+						<h:inputText id="itSobrenome" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroClienteController.entity.sobrenome}" />
+						<h:message for="itSobrenome" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Data de Nascimento:" />
+					<h:panelGroup>
+						<h:inputText id="itDataNascimento"
+							value="#{cadastroClienteController.entity.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+						</h:inputText>
+						<h:message for="itDataNascimento" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Senha:" />
+					<h:panelGroup>
+						<h:inputSecret id="itSenha"
+							value="#{cadastroClienteController.entity.senha}" required="true"
+							requiredMessage="Esse campo não pode ser nulo." />
+						<h:message for="itSenha" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Telefone:" />
+					<h:panelGroup>
+						<h:inputText id="itTelefone"
+							value="#{cadastroClienteController.entity.telefone}"
+							required="true" requiredMessage="Esse campo não pode ser nulo." />
+						<h:message for="itTelefone" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Tipo de Usuário:" />
+					<h:selectOneMenu
+						value="#{cadastroClienteController.entity.tipoUsuario}">
+						<f:selectItems
+							value="#{cadastroClienteController.listaTipoUsuario}"
+							var="tipo" itemLabel="#{tipo.label}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+				<h:commandButton value="Incluir"
+					disabled="#{cadastroClienteController.entity.id != null}"
+					actionListener="#{cadastroClienteController.incluir}" />
+				<h:commandButton value="Limpar"
+					actionListener="#{cadastroClienteController.limpar}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+				<h:commandButton value="Fazer login"
+					action="login.xhtml?faces-redirect=true">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
