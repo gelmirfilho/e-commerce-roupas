@@ -14,47 +14,91 @@
 	<h:outputStylesheet library="css" name="template.css" />
 </h:head>
 
-<h:body>
+<style>
+.commandlink {
+  border: 5px outset red;
+  background-color: lightblue;
+  text-align: center;
+}
+</style>
+
+<h:body style="text-decoration:none;color:black;font-family:georgia,garamond,serif;">
 	<div class="wrapper" style="background-color: #59C345; color: black">
 		<div class="box navbar header"
 			style="background-color: green; color: black">
-			<h1>.: Loja de Roupas :.</h1>
+			<h1
+				style="text-decoration: none; color: black; font-family: georgia, garamond, serif; font-style: italic;">.:
+				Loja de Roupas :.</h1>
 			<div>
 				<h:form>
-					<h:outputLabel style="text-transform: uppercase"
+					<h:commandLink
+						style="color:black;text-transform: uppercase;font-style:italic"
+						value="Fazer login"
+						rendered="#{templateController.usuarioLogado == null}"
+						action="login.xhtml?faces-redirect=true" />
+					<h:outputLabel
+						style="color:black;text-transform: uppercase;font-style:italic"
 						value="Olá #{templateController.usuarioLogado.nome} #{templateController.usuarioLogado.sobrenome }"
 						rendered="#{templateController.usuarioLogado != null}" />
 					<h:commandLink value=" (Sair)"
 						action="#{templateController.encerrarSessao}"
 						rendered="#{templateController.usuarioLogado != null}"
-						style="color:white" />
+						style="color:black;text-transform: uppercase;font-style:italic" />
 				</h:form>
-				<h:outputLabel style="text-transform: lowercase"
+				
+				<h:outputLabel
+					style="text-decoration:none;color:black;text-transform: lowercase;font-style:italic;font-family:georgia,garamond,serif;"
 					value="Logado como #{templateController.usuarioLogado.tipoUsuario}"
 					rendered="#{templateController.usuarioLogado != null}" />
+					
+				<h:form>
+				
+					<h:commandLink
+						style="color:black;text-transform: uppercase;font-style:italic"
+						value="Crie sua conta agora"
+						rendered="#{templateController.usuarioLogado == null}"
+						action="cadastroCliente.xhtml?faces-redirect=true" />
+				</h:form>
 			</div>
 		</div>
 		<div class="box sidebar" style="text-align: center;">
 			<ui:insert name="menu">
 				<h1>Menu</h1>
+				<hr />
 				<h:form>
-					<h:commandLink value="Página Principal"
+					<h:commandLink 
+						style="color:black;"
+						value="Página Principal"
 						action="home.xhtml?faces-redirect=true" />
-					<br />
-					<h:commandLink value="Carrinho" />
-					<br />
-					<h:commandLink value="Histórico de Venda" />
-					<br />
-					<h:commandLink value="Alterar Dados da Conta"
-						action="alterarDados.xhtml?faces-redirect=true" />
-					<br />
-					<h:commandLink value="Cadastro de Usuário"
+					<br /> <hr />
+					<h:commandLink  
+						style="color:black;"
+						value="Carrinho" 
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}"/>
+					<br /> <hr />
+					<h:commandLink 
+						style="color:black;"
+						value="Histórico de Venda" 
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}"/>
+					<br /> <hr />
+					<h:commandLink 
+						style="color:black;"
+						value="Alterar Dados da Conta"
+						action="alterarDados.xhtml?faces-redirect=true"
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}" />
+					<br /> <hr />
+					<h:commandLink 
+						style="color:black;"
+						value="Cadastro de Usuário"
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
 						action="cadastroAdministrador.xhtml?faces-redirect=true" />
-					<br />
-					<h:commandLink value="Cadastro de Roupa"
+					<br /> <hr />
+					<h:commandLink 
+						style="color:black;"
+						value="Cadastro de Roupa"
+						action="cadastroRoupa.xhtml?faces-redirect=true"
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}" />
-					<br />
+					<br /> <hr/>
 				</h:form>
 			</ui:insert>
 		</div>

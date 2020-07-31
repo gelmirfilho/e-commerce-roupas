@@ -32,7 +32,8 @@ public class SecurityFilter implements Filter {
 		String endereco = servletRequest.getRequestURI();
 		System.out.println(endereco);
 
-		if (endereco.equals("/roupas/faces/login.xhtml") || endereco.equals("/roupas/faces/cadastroCliente.xhtml")) {
+		if (endereco.equals("/roupas/faces/login.xhtml") || endereco.equals("/roupas/faces/cadastroCliente.xhtml")
+				|| endereco.equals("/roupas/faces/home.xhtml")) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -51,11 +52,11 @@ public class SecurityFilter implements Filter {
 			if (endereco.equals("/roupas/faces/template.xhtml")) {
 				((HttpServletResponse) response).sendRedirect("/roupas/faces/home.xhtml");
 			}
-			
+
 			usuario.getTipoUsuario();
 			if (usuario.getTipoUsuario() == TipoUsuario.CLIENTE) {
-				if (endereco.equals("/roupas/faces/cadastroAdministrador.xhtml")) {
-					((HttpServletResponse) response).sendRedirect("/roupas/faces/cadastroCliente.xhtml");
+				if (endereco.equals("/roupas/faces/cadastroAdministrador.xhtml") || endereco.equals("/roupas/faces/cadastroCliente.xhtml")) {
+					((HttpServletResponse) response).sendRedirect("/roupas/faces/home.xhtml");
 				}
 			}
 

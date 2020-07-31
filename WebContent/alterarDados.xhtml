@@ -3,14 +3,65 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
 		<h:body>
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="true" />
 
-			<h1>.:Gerenciador sua conta:.</h1>
+			<h1 class="col-auto">.:Gerenciador sua conta:.</h1>
+			<hr />
+			<h:form id="formDataTable" class="col-form-label-lg form-control-plaintext">
+				<h:dataTable id="dataTable"
+					value="#{templateController.usuarioLogado}" var="obj">
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-success" >
+						<f:facet name="header">Email</f:facet>
+						<h:outputLabel value="#{obj.email}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-warning">
+						<f:facet name="header">Cpf</f:facet>
+						<h:outputLabel value="#{obj.cpf}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-success">
+						<f:facet  name="header">Nome</f:facet>
+						<h:outputLabel value="#{obj.nome}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-warning">
+						<f:facet name="header">Sobrenome</f:facet>
+						<h:outputLabel value="#{obj.sobrenome}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-success">
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<h:outputLabel value="#{obj.dataNascimento}">
+							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+						</h:outputLabel>
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-warning" >
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputLabel value="#{obj.telefone}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-success">
+						<f:facet name="header">Tipo de Usuário</f:facet>
+						<h:outputLabel value="#{obj.tipoUsuario.label}" />
+					</h:column>
+
+					<h:column class="col-form-label-lg form-control-plaintext btn-warning">
+						<f:facet name="header">Ação</f:facet>
+						<h:commandLink value="Alterar dados"
+							actionListener="#{cadastroAdministradorController.editar(obj)}" />
+					</h:column>
+
+				</h:dataTable>
+
+			</h:form>
+			<hr />
 			<h:form>
 				<h:panelGrid columns="2">
 
@@ -73,73 +124,21 @@
 					</h:panelGroup>
 
 				</h:panelGrid>
-				<h:commandButton value="Alterar"
+				<h:commandButton value="Alterar dados"
 					disabled="#{cadastroAdministradorController.entity.id == null}"
 					actionListener="#{cadastroAdministradorController.alterar}" />
-				<h:commandButton value="Excluir"
+				<h:commandButton value="Excluir conta"
 					disabled="#{cadastroAdministradorController.entity.id == null}"
-					actionListener="#{cadastroAdministradorController.remover}">
+					actionListener="#{cadastroAdministradorController.remover}"
+					action="login.xhtml?faces-redirect=true">
 					<f:ajax execute="@this" render="@form formDataTable" />
 				</h:commandButton>
-				<h:commandButton value="Limpar"
+				<h:commandButton value="Limpar dados"
 					actionListener="#{cadastroAdministradorController.limpar}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:form>
-			<h:form id="formDataTable">
-				<h:dataTable id="dataTable"
-					value="#{templateController.usuarioLogado}" var="obj">
-
-					<h:column>
-						<f:facet name="header">Email</f:facet>
-						<h:outputLabel value="#{obj.email}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Cpf</f:facet>
-						<h:outputLabel value="#{obj.cpf}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:outputLabel value="#{obj.nome}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Sobrenome</f:facet>
-						<h:outputLabel value="#{obj.sobrenome}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Data de Nascimento</f:facet>
-						<h:outputLabel value="#{obj.dataNascimento}">
-							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
-						</h:outputLabel>
-					</h:column>
-
-					<!--<h:column>
-				<f:facet name="header">Senha</f:facet>
-				<h:outputLabel value="#{obj.senha}" />
-			</h:column> -->
-
-					<h:column>
-						<f:facet name="header">Telefone</f:facet>
-						<h:outputLabel value="#{obj.telefone}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Tipo de Usuário</f:facet>
-						<h:outputLabel value="#{obj.tipoUsuario.label}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ação</f:facet>
-						<h:commandLink value="Editar"
-							actionListener="#{cadastroAdministradorController.editar(obj)}" />
-					</h:column>
-
-				</h:dataTable>
-			</h:form>
+			<hr />
 		</h:body>
 	</ui:define>
 </ui:composition>

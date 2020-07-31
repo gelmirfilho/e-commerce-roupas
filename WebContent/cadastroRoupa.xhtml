@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+
+		<h:messages errorStyle="color:red" warnStyle="color:orange"
+			infoStyle="color:green" globalOnly="false" />
+
+		<h1>.:Cadastro de Roupa:.</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Descrição:" />
+				<h:panelGroup>
+					<h:inputText id="itDescricao"
+						value="#{cadastroRoupaController.entity.descricao}" />
+					<h:message for="itDescricao" style="color:red" />
+				</h:panelGroup>
+
+				<h:outputLabel value="Tamanho:" />
+				<h:panelGroup>
+					<h:inputText id="itTamanho" value="#{cadastroRoupaController.entity.tamanho}" />
+					<h:message for="itTamanho" style="color:red" />
+				</h:panelGroup>
+
+				<h:outputLabel value="Preço:" />
+				<h:panelGroup>
+					<h:inputText id="itPreco" value="#{cadastroRoupaController.entity.preco}" />
+					<h:message for="itPreco" style="color:red" />
+				</h:panelGroup>
+
+				<h:outputLabel value="Estoque:" />
+				<h:panelGroup>
+					<h:inputText id="itEstoque"
+						value="#{cadastroRoupaController.entity.estoque}" />
+					<h:message for="itEstoque" style="color:red" />
+				</h:panelGroup>
+
+
+			</h:panelGrid>
+			<h:commandButton value="Incluir"
+				disabled="#{cadastroRoupaController.entity.id != null}"
+				actionListener="#{cadastroRoupaController.incluir}" />
+			<h:commandButton value="Alterar"
+				disabled="#{cadastroRoupaController.entity.id == null}"
+				actionListener="#{cadastroRoupaController.alterar}" />
+			<h:commandButton value="Excluir"
+				disabled="#{cadastroRoupaController.entity.id == null}"
+				actionListener="#{cadastroRoupaController.remover}">
+				<f:ajax execute="@this" render="@form formDataTable" />
+			</h:commandButton>
+			<h:commandButton value="Limpar"
+				actionListener="#{cadastroRoupaController.limpar}">
+				<f:ajax execute="@this" render="@form" />
+			</h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

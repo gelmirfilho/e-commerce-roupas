@@ -1,7 +1,10 @@
 package br.com.roupas.model;
 
-public class Entity<T> implements Cloneable {
+import java.io.Serializable;
 
+public class Entity<T> implements Cloneable, Serializable {
+
+	private static final long serialVersionUID = -3339954210488682729L;
 	private Integer id;
 	
 	public Integer getId() {
