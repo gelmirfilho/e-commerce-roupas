@@ -8,24 +8,24 @@
 <ui:define name="conteudo">
 
 	<center>
-		<h1>Venda de Livros</h1>
+		<h1>Venda de Roupas</h1>
 
 		<h:form>
 			<h:messages style="color:red" />
 			<h:panelGrid id="panelForm"  columns="3">
 
 				<h:outputLabel value="Descrição do Livro: " />
-				<h:inputText value="#{vendaLivroController.descricao}" />
+				<h:inputText value="#{vendaRoupaController.descricao}" />
 
 				<h:commandButton value="Pesquisar"
-					actionListener="#{vendaLivroController.pesquisar}" >
+					actionListener="#{vendaRoupaController.pesquisar}" >
 					<f:ajax execute="panelForm" render="@all" />
 				</h:commandButton>	
 				
 			</h:panelGrid>
 
 			
-			<h:dataTable value="#{vendaLivroController.listaLivro}" var="obj">
+			<h:dataTable value="#{vendaRoupaController.listaRoupa}" var="obj">
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputLabel value="#{obj.descricao}" />
@@ -41,7 +41,7 @@
 				<h:column>
 					<f:facet name="header">Ação</f:facet>
 					<h:commandButton value="Adicionar Carrinho"
-						actionListener="#{vendaLivroController.adicionar(obj.id)}" >
+						actionListener="#{vendaRoupaController.adicionar(obj.id)}" >
 						<f:ajax render="@all" execute="@this" />
 					</h:commandButton>
 				</h:column>

@@ -9,54 +9,65 @@
 		<h:body>
 			<h:messages style="color:red;margin:8px;" />
 			<h:form>
-				<h:panelGrid columns="3">
-					
+				<h:panelGrid columns="5">
+
+					<h2>Pesquisar por:</h2> 
+
 					<h:selectOneMenu value="#{homeController.tipoFiltro}">
 						<f:selectItem itemValue="1" itemLabel="Descrição" />
 						<f:selectItem itemValue="2" itemLabel="Tamanho" />
 					</h:selectOneMenu>
-					
+
 					<h:inputText value="#{homeController.filtro}" />
-					
+
 					<h:commandButton value="Pesquisar"
-						actionListener="#{homeController.pesquisar}" />
-						
+						actionListener="#{homeController.pesquisar}" /> <span style="opacity:0;">This sentence is invisible</span> 
+
 				</h:panelGrid>
 			</h:form>
 			
+			<hr />
+
 			<h:form id="formDataTable">
-			
-				<h:dataTable id="dataTable"
-					value="#{homeController.listaRoupa}" var="obj">
-					
+
+				<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
+					var="obj">
+
 					<h:column>
 						<f:facet name="header">Descrição</f:facet>
-						<h:outputLabel value="#{obj.descricao}" />
+						<hr />
+						<h:outputLabel value="#{obj.descricao}" /> <span style="opacity:0;">This sentence is invisible</span> 
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">Preço</f:facet>
-						<h:outputLabel value="#{obj.preco}" />
+						<hr />
+						<h:outputLabel value="#{obj.preco}" /> <span style="opacity:0;">This sentence is invisible</span> 
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">Tamanho</f:facet>
-						<h:outputLabel value="#{obj.tamanho}" />
+						<hr />
+						<h:outputLabel value="#{obj.tamanho}" /> <span style="opacity:0;">This sentence is invisible</span> 
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">Estoque</f:facet>
-						<h:outputLabel value="#{obj.estoque}" />
+						<hr />
+						<h:outputLabel value="#{obj.estoque}" /> <span style="opacity:0;">This sentence is invisible</span> 
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">Ação</f:facet>
-						<h:commandLink value="Adicionar no carrinho"
-							action="#{home.editar(obj)}" />
+						<hr />
+						<h:commandButton value="Adicionar Carrinho"
+							actionListener="#{homeController.adicionar(obj.id)}">
+							<f:ajax render="@all" execute="@this" />
+						</h:commandButton>
 					</h:column>
-					
+
 				</h:dataTable>
-				
+
 			</h:form>
 		</h:body>
 	</ui:define>

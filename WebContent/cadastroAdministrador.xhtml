@@ -102,59 +102,59 @@
 				<h:dataTable id="dataTable"
 					value="#{cadastroAdministradorController.listaUsuario}" var="obj">
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-warning">
+					<h:column>
 						<f:facet name="header">Id</f:facet>
-						<h:outputLabel value="#{obj.id}" />
+						<hr />
+						<h:outputLabel value="#{obj.id}" /> <span style="opacity:0;">in</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-success">
+					<h:column>
 						<f:facet name="header">Email</f:facet>
-						<h:outputLabel value="#{obj.email}" />
+						<hr />
+						<h:outputLabel value="#{obj.email}" /> <span style="opacity:0;">inv</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-warning">
+					<h:column>
 						<f:facet name="header">Cpf</f:facet>
-						<h:outputLabel value="#{obj.cpf}" />
+						<hr />
+						<h:outputLabel value="#{obj.cpf}" /> <span style="opacity:0;">inv</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-success">
+					<h:column>
 						<f:facet name="header">Nome</f:facet>
-						<h:outputLabel value="#{obj.nome}" />
+						<hr />
+						<h:outputLabel value="#{obj.nome}" /> <span style="opacity:0;">inv</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-warning">
+					<h:column>
 						<f:facet name="header">Sobrenome</f:facet>
-						<h:outputLabel value="#{obj.sobrenome}" />
+						<hr />
+						<h:outputLabel value="#{obj.sobrenome}" /><span style="opacity:0;">invaaaaaaa</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-success">
+					<h:column>
 						<f:facet name="header">Data de Nascimento</f:facet>
-						<h:outputLabel value="#{obj.dataNascimento}">
+						<hr />
+						<h:outputLabel value="#{obj.dataNascimento}"> <span style="opacity:0;">invaaaaaaa</span>
 							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
 						</h:outputLabel>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-warning">
+					<h:column>
 						<f:facet name="header">Telefone</f:facet>
-						<h:outputLabel value="#{obj.telefone}" />
+						<hr />
+						<h:outputLabel value="#{obj.telefone}" /> <span style="opacity:0;">inv</span>
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-success">
+					<h:column>
 						<f:facet name="header">Tipo de Usuário</f:facet>
-						<h:outputLabel value="#{obj.tipoUsuario.label}" />
+						<hr />
+						<h:outputLabel value="#{obj.tipoUsuario.label}" /> <span style="opacity:0;">inv</span> 
 					</h:column>
 
-					<h:column
-						class="col-form-label-lg form-control-plaintext btn-warning">
+					<h:column>
 						<f:facet name="header">Ação</f:facet>
+						<hr />
 						<h:commandLink value="Editar"
 							actionListener="#{cadastroAdministradorController.editar(obj)}" />
 					</h:column>
