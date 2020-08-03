@@ -3,6 +3,8 @@ package br.com.roupas.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -21,6 +23,10 @@ public class CadastroAdministradorController extends Controller<Usuario> impleme
 	
 	public CadastroAdministradorController() {
 		super(new UsuarioDAO());
+		Flash flash = FacesContext.getCurrentInstance().
+				getExternalContext().getFlash();
+		flash.keep("flashRoupa");
+		entity = (Usuario) flash.get("flashUsuario");
 	}
 	
 	@Override

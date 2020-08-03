@@ -10,57 +10,7 @@
 				infoStyle="color:green" globalOnly="true" />
 
 			<h1 class="col-auto">.:Gerenciador sua conta:.</h1>
-			<hr />
-			<h:form id="formDataTable" class="col-form-label-lg form-control-plaintext">
-				<h:dataTable id="dataTable"
-					value="#{templateController.usuarioLogado}" var="obj">
 
-					<h:column >
-						<f:facet name="header">Email</f:facet>
-						<h:outputLabel value="#{obj.email}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Cpf</f:facet>
-						<h:outputLabel value="#{obj.cpf}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column>
-						<f:facet  name="header">Nome</f:facet>
-						<h:outputLabel value="#{obj.nome}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Sobrenome</f:facet>  <span style="opacity:0;">invisible</span> 
-						<h:outputLabel value="#{obj.sobrenome}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column> 
-						<f:facet name="header">Data de Nascimento</f:facet> <span style="opacity:0;">invisible</span> 
-						<h:outputLabel value="#{obj.dataNascimento}"> <span style="opacity:0;">invisible</span> 
-							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
-						</h:outputLabel>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Telefone</f:facet>
-						<h:outputLabel value="#{obj.telefone}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Tipo de Usuário</f:facet> <span style="opacity:0;">invisible</span> 
-						<h:outputLabel value="#{obj.tipoUsuario.label}" /> <span style="opacity:0;">invisible</span> 
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ação</f:facet>
-						<h:commandLink value="Alterar dados"
-							actionListener="#{cadastroAdministradorController.editar(obj)}" />  
-					</h:column>
-
-				</h:dataTable>
-
-			</h:form>
 			<hr />
 			<h:form>
 				<h:panelGrid columns="2">
@@ -126,7 +76,7 @@
 				</h:panelGrid>
 				<h:commandButton value="Alterar dados"
 					disabled="#{cadastroAdministradorController.entity.id == null}"
-					actionListener="#{cadastroAdministradorController.alterar}" />
+					actionListener="#{cadastroAdministradorController.alterar}"/>
 				<h:commandButton value="Excluir conta"
 					disabled="#{cadastroAdministradorController.entity.id == null}"
 					actionListener="#{cadastroAdministradorController.remover}"
@@ -137,6 +87,71 @@
 					actionListener="#{cadastroAdministradorController.limpar}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
+			</h:form>
+			<hr />
+
+			<h:form id="formDataTable"
+				class="col-form-label-lg form-control-plaintext">
+				
+				<h:dataTable id="dataTable"
+					value="#{templateController.usuarioLogado}" var="obj">
+
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputLabel value="#{obj.email}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Cpf</f:facet>
+						<h:outputLabel value="#{obj.cpf}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputLabel value="#{obj.nome}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Sobrenome</f:facet>
+						<span style="opacity: 0;">invisible</span>
+						<h:outputLabel value="#{obj.sobrenome}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<span style="opacity: 0;">invisible</span>
+						<h:outputLabel value="#{obj.dataNascimento}">
+							<span style="opacity: 0;">invisible</span>
+							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+						</h:outputLabel>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputLabel value="#{obj.telefone}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}">
+						<f:facet name="header">Tipo de Usuário</f:facet>
+						<span style="opacity: 0;">invisible</span>
+						<h:outputLabel value="#{obj.tipoUsuario.label}" />
+						<span style="opacity: 0;">invisible</span>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Ação</f:facet>
+						<h:commandLink value="Alterar dados"
+							actionListener="#{cadastroAdministradorController.editar(obj)}" />
+					</h:column>
+
+				</h:dataTable>
+
 			</h:form>
 			<hr />
 		</h:body>

@@ -20,13 +20,14 @@
 }
 </style>
 
-<h:body style="text-decoration:none;color:black;font-family:georgia,garamond,serif;">
+<h:body
+	style="text-decoration:none;color:black;font-family:georgia,garamond,serif;">
 
 	<ui:define name="codecss">
 		<h:outputStylesheet library="styles/userpanel" name="userpanel.css" />
 	</ui:define>
-	
-	<div class="wrapper" style="background-color: #59C345; color: black">
+
+	<div class="wrapper" style="background-color: #46bd2f; color: black">
 		<div class="box navbar header"
 			style="background-color: green; color: black">
 			<h1
@@ -51,7 +52,7 @@
 
 				<h:outputLabel
 					style="text-decoration:none;color:black;text-transform: lowercase;font-style:italic;font-family:georgia,garamond,serif;"
-					value="Logado como #{templateController.usuarioLogado.tipoUsuario}"
+					value="Bem-vindo #{templateController.usuarioLogado.tipoUsuario}"
 					rendered="#{templateController.usuarioLogado != null}" />
 
 				<h:form>
@@ -73,11 +74,15 @@
 						action="home.xhtml?faces-redirect=true" />
 					<br />
 					<hr />
-					<h:commandLink style="color:black;" value="Carrinho"
+					<h:commandLink style="color:black;" value="Carrinho "
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}"
 						action="carrinho.xhtml?faces-redirect=true" />
+					<h:outputLabel rendered="#{homeController.tamanhoCarrinho() == 1}"
+						value=" com #{homeController.tamanhoCarrinho()} produto" />
+					<h:outputLabel rendered="#{homeController.tamanhoCarrinho() > 1}"
+						value=" com #{homeController.tamanhoCarrinho()} produtos" />
 					<br />
-					
+
 					<hr />
 					<h:commandLink style="color:black;" value="Histórico de Venda"
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}"
@@ -114,6 +119,6 @@
 			<h:outputText value="2020 - UNITINS - Todos os direitos reservados." />
 		</div>
 	</div>
-	
+
 </h:body>
 </html>

@@ -22,13 +22,15 @@
 
 				<h:outputLabel value="Tamanho:" />
 				<h:panelGroup>
-					<h:inputText id="itTamanho" value="#{cadastroRoupaController.entity.tamanho}" />
+					<h:inputText id="itTamanho"
+						value="#{cadastroRoupaController.entity.tamanho}" />
 					<h:message for="itTamanho" style="color:red" />
 				</h:panelGroup>
 
 				<h:outputLabel value="Preço:" />
 				<h:panelGroup>
-					<h:inputText id="itPreco" value="#{cadastroRoupaController.entity.preco}" />
+					<h:inputText id="itPreco"
+						value="#{cadastroRoupaController.entity.preco}" />
 					<h:message for="itPreco" style="color:red" />
 				</h:panelGroup>
 
@@ -57,6 +59,79 @@
 				<f:ajax execute="@this" render="@form" />
 			</h:commandButton>
 		</h:form>
+
+		<hr />
+
+		<h:form>
+			<h:panelGrid columns="5">
+
+				<h2>Pesquisar por:</h2>
+
+				<h:selectOneMenu value="#{homeController.tipoFiltro}">
+					<f:selectItem itemValue="1" itemLabel="Descrição" />
+					<f:selectItem itemValue="2" itemLabel="Tamanho" />
+				</h:selectOneMenu>
+
+				<h:inputText value="#{homeController.filtro}" />
+
+				<h:commandButton value="Pesquisar"
+					actionListener="#{homeController.pesquisar}" />
+				<span style="opacity: 0;">This sentence is invisible</span>
+
+			</h:panelGrid>
+		</h:form>
+
+		<hr />
+
+		<h:form id="formDataTable">
+
+			<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
+				var="obj">
+
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<hr />
+					<h:outputLabel value="#{obj.descricao}" />
+					<span style="opacity: 0;">This sentence is invisible</span>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Preço</f:facet>
+					<hr />
+					<h:outputLabel value="#{obj.preco}" />
+					<span style="opacity: 0;">This sentence is invisible</span>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tamanho</f:facet>
+					<hr />
+					<h:outputLabel value="#{obj.tamanho}" />
+					<span style="opacity: 0;">This sentence is invisible</span>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Estoque</f:facet>
+					<hr />
+					<h:outputLabel value="#{obj.estoque}" />
+					<span style="opacity: 0;">This sentence is invisible</span>
+				</h:column>
+
+				<h:column
+					rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
+					<f:facet name="header">Ação</f:facet>
+					<hr />
+					<h:commandButton value="Alterar"
+						actionListener="#{cadastroRoupaController.editar(obj)}">
+						<f:ajax render="@all" execute="@this" />
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+
+		<hr />
+
 	</ui:define>
 </ui:composition>
 </html>

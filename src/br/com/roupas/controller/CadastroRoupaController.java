@@ -1,5 +1,7 @@
 package br.com.roupas.controller;
 
+import java.io.Serializable;
+
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
@@ -10,9 +12,9 @@ import br.com.roupas.model.Roupa;
 
 @Named
 @ViewScoped
-public class CadastroRoupaController extends Controller<Roupa> {
+public class CadastroRoupaController extends Controller<Roupa>  implements Serializable {
 
-	private static final long serialVersionUID = 333428363094667187L;
+	private static final long serialVersionUID = 9206801041506192806L;
 
 	public CadastroRoupaController() {
 		super(new RoupaDAO());

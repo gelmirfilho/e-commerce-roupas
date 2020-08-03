@@ -57,7 +57,7 @@
 						<h:outputLabel value="#{obj.estoque}" /> <span style="opacity:0;">This sentence is invisible</span> 
 					</h:column>
 
-					<h:column>
+					<h:column rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
 						<f:facet name="header">Ação</f:facet>
 						<hr />
 						<h:commandButton value="Adicionar Carrinho"

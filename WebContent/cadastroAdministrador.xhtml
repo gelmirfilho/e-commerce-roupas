@@ -98,63 +98,95 @@
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:form>
+
+			<hr />
+
+			<h:form>
+				<h:panelGrid columns="5">
+
+					<h2>Pesquisar por:</h2>
+
+					<h:selectOneMenu value="#{homeController.tipoFiltro}">
+						<f:selectItem itemValue="1" itemLabel="Descrição" />
+						<f:selectItem itemValue="2" itemLabel="Tamanho" />
+					</h:selectOneMenu>
+
+					<h:inputText value="#{homeController.filtro}" />
+
+					<h:commandButton value="Pesquisar"
+						actionListener="#{homeController.pesquisar}" />
+					<span style="opacity: 0;">This sentence is invisible</span>
+
+				</h:panelGrid>
+			</h:form>
+
+			<hr />
+
 			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
 					value="#{cadastroAdministradorController.listaUsuario}" var="obj">
 
 					<h:column>
 						<f:facet name="header">Id</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.id}" /> <span style="opacity:0;">in</span>
+
+						<h:outputLabel value="#{obj.id}" />
+						<span style="opacity: 0;">in</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Email</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.email}" /> <span style="opacity:0;">inv</span>
+
+						<h:outputLabel value="#{obj.email}" />
+						<span style="opacity: 0;">inv</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Cpf</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.cpf}" /> <span style="opacity:0;">inv</span>
+
+						<h:outputLabel value="#{obj.cpf}" />
+						<span style="opacity: 0;">inv</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Nome</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.nome}" /> <span style="opacity:0;">inv</span>
+
+						<h:outputLabel value="#{obj.nome}" />
+						<span style="opacity: 0;">inv</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Sobrenome</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.sobrenome}" /><span style="opacity:0;">invaaaaaaa</span>
+
+						<h:outputLabel value="#{obj.sobrenome}" />
+						<span style="opacity: 0;">invaaaaaaa</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Data de Nascimento</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.dataNascimento}"> <span style="opacity:0;">invaaaaaaa</span>
+
+						<h:outputLabel value="#{obj.dataNascimento}">
+							<span style="opacity: 0;">invaaaaaaa</span>
 							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
 						</h:outputLabel>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Telefone</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.telefone}" /> <span style="opacity:0;">inv</span>
+
+						<h:outputLabel value="#{obj.telefone}" />
+						<span style="opacity: 0;">inv</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Tipo de Usuário</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.tipoUsuario.label}" /> <span style="opacity:0;">inv</span> 
+
+						<h:outputLabel value="#{obj.tipoUsuario.label}" />
+						<span style="opacity: 0;">inv</span>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Ação</f:facet>
-						<hr />
+
 						<h:commandLink value="Editar"
 							actionListener="#{cadastroAdministradorController.editar(obj)}" />
 					</h:column>

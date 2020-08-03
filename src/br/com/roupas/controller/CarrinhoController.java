@@ -1,12 +1,16 @@
 package br.com.roupas.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.roupas.application.Session;
 import br.com.roupas.application.Util;
@@ -43,7 +47,7 @@ public class CarrinhoController implements Serializable{
 		// alunos vao implementar
 	}
 	
-	public void finalizar() {
+	public void finalizar() throws IOException {
 		Usuario usuario = (Usuario)Session.getInstance().getAttribute("usuarioLogado");
 		if (usuario == null) {
 			Util.addWarningMessage("Eh preciso estar logado para realizar uma venda. Faca o Login!!");
@@ -64,11 +68,16 @@ public class CarrinhoController implements Serializable{
 		} else {
 			Util.addErrorMessage("Erro ao finalizar a Venda.");
 		}
-		
+		reload();
 	}
 
 	public void setVenda(Venda venda) {
 		
 		this.venda = venda;
+	}
+	
+	public void reload() throws IOException {
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 }

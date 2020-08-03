@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-
 import br.com.roupas.application.Session;
 import br.com.roupas.model.Usuario;
 
@@ -18,8 +17,9 @@ public class TemplateController implements Serializable {
 
 	public Usuario getUsuarioLogado() {
 		if (usuarioLogado == null) // buscando o usuario da sessao
-			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");			
+			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
 		return usuarioLogado;
+		
 	}
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
