@@ -1,12 +1,15 @@
 package br.com.roupas.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.roupas.application.Util;
 import br.com.roupas.dao.UsuarioDAO;
@@ -68,5 +71,26 @@ public class CadastroAdministradorController extends Controller<Usuario> impleme
 	public TipoUsuario[] getListaTipoUsuario() {
 		return TipoUsuario.values();
 	}
+	
+	public void alterar(){
+		if (validarDados()) {
+			if (dao.update(getEntity())) {
+				limpar();
+				Util.addInfoMessage("Alteração realizada com sucesso.");
+				try {
+					reload();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				Util.addInfoMessage("Erro ao alterar no banco de dados.");
+			}
+		}
+	}
 
+	public void reload() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+	}
 }

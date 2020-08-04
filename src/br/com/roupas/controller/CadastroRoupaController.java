@@ -1,12 +1,17 @@
 package br.com.roupas.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
+import br.com.roupas.application.Util;
 import br.com.roupas.dao.RoupaDAO;
 import br.com.roupas.model.Roupa;
 
@@ -29,5 +34,27 @@ public class CadastroRoupaController extends Controller<Roupa>  implements Seria
 		if (entity == null)
 			entity = new Roupa();
 		return entity;
+	}
+	
+	@Override
+	public void alterar(){
+		if (validarDados()) {
+			if (dao.update(getEntity())) {
+				limpar();
+				try {
+					reload();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				Util.addInfoMessage("Erro ao alterar no banco de dados.");
+			}
+		}
+	}
+	
+	public void reload() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 }

@@ -6,132 +6,134 @@
 
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-
-		<h:messages errorStyle="color:red" warnStyle="color:orange"
-			infoStyle="color:green" globalOnly="false" />
-
-		<h1>.:Cadastro de Roupa:.</h1>
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Descrição:" />
-				<h:panelGroup>
-					<h:inputText id="itDescricao"
-						value="#{cadastroRoupaController.entity.descricao}" />
-					<h:message for="itDescricao" style="color:red" />
-				</h:panelGroup>
-
-				<h:outputLabel value="Tamanho:" />
-				<h:panelGroup>
-					<h:inputText id="itTamanho"
-						value="#{cadastroRoupaController.entity.tamanho}" />
-					<h:message for="itTamanho" style="color:red" />
-				</h:panelGroup>
-
-				<h:outputLabel value="Preço:" />
-				<h:panelGroup>
-					<h:inputText id="itPreco"
-						value="#{cadastroRoupaController.entity.preco}" />
-					<h:message for="itPreco" style="color:red" />
-				</h:panelGroup>
-
-				<h:outputLabel value="Estoque:" />
-				<h:panelGroup>
-					<h:inputText id="itEstoque"
-						value="#{cadastroRoupaController.entity.estoque}" />
-					<h:message for="itEstoque" style="color:red" />
-				</h:panelGroup>
+		<center>
+			<h:messages errorStyle="color:red" warnStyle="color:orange"
+				infoStyle="color:green" globalOnly="false" />
 
 
-			</h:panelGrid>
-			<h:commandButton value="Incluir"
-				disabled="#{cadastroRoupaController.entity.id != null}"
-				actionListener="#{cadastroRoupaController.incluir}" />
-			<h:commandButton value="Alterar"
-				disabled="#{cadastroRoupaController.entity.id == null}"
-				actionListener="#{cadastroRoupaController.alterar}" />
-			<h:commandButton value="Excluir"
-				disabled="#{cadastroRoupaController.entity.id == null}"
-				actionListener="#{cadastroRoupaController.remover}">
-				<f:ajax execute="@this" render="@form formDataTable" />
-			</h:commandButton>
-			<h:commandButton value="Limpar"
-				actionListener="#{cadastroRoupaController.limpar}">
-				<f:ajax execute="@this" render="@form" />
-			</h:commandButton>
-		</h:form>
+			<h1>.:Gerenciador de Roupas:.</h1>
+			<h1>Somente pessoas autorizadas</h1>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Descrição:" />
+					<h:panelGroup>
+						<h:inputText id="itDescricao"
+							value="#{cadastroRoupaController.entity.descricao}" />
+						<h:message for="itDescricao" style="color:red" />
+					</h:panelGroup>
 
-		<hr />
+					<h:outputLabel value="Tamanho:" />
+					<h:panelGroup>
+						<h:inputText id="itTamanho"
+							value="#{cadastroRoupaController.entity.tamanho}" />
+						<h:message for="itTamanho" style="color:red" />
+					</h:panelGroup>
 
-		<h:form>
-			<h:panelGrid columns="5">
+					<h:outputLabel value="Preço:" />
+					<h:panelGroup>
+						<h:inputText id="itPreco"
+							value="#{cadastroRoupaController.entity.preco}" />
+						<h:message for="itPreco" style="color:red" />
+					</h:panelGroup>
 
-				<h2>Pesquisar por:</h2>
+					<h:outputLabel value="Estoque:" />
+					<h:panelGroup>
+						<h:inputText id="itEstoque"
+							value="#{cadastroRoupaController.entity.estoque}" />
+						<h:message for="itEstoque" style="color:red" />
+					</h:panelGroup>
 
-				<h:selectOneMenu value="#{homeController.tipoFiltro}">
-					<f:selectItem itemValue="1" itemLabel="Descrição" />
-					<f:selectItem itemValue="2" itemLabel="Tamanho" />
-				</h:selectOneMenu>
 
-				<h:inputText value="#{homeController.filtro}" />
+				</h:panelGrid>
+				<h:commandButton value="Incluir"
+					disabled="#{cadastroRoupaController.entity.id != null}"
+					actionListener="#{cadastroRoupaController.incluir}" />
+				<h:commandButton value="Alterar"
+					disabled="#{cadastroRoupaController.entity.id == null}"
+					actionListener="#{cadastroRoupaController.alterar}" />
+				<h:commandButton value="Excluir"
+					disabled="#{cadastroRoupaController.entity.id == null}"
+					actionListener="#{cadastroRoupaController.remover}">
+					<f:ajax execute="@this" render="@form formDataTable" />
+				</h:commandButton>
+				<h:commandButton value="Limpar"
+					actionListener="#{cadastroRoupaController.limpar}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:form>
 
-				<h:commandButton value="Pesquisar"
-					actionListener="#{homeController.pesquisar}" />
-				<span style="opacity: 0;">This sentence is invisible</span>
+			<hr />
 
-			</h:panelGrid>
-		</h:form>
+			<h:form>
+				<h:panelGrid columns="5">
 
-		<hr />
+					<h2>Pesquisar por:</h2>
 
-		<h:form id="formDataTable">
+					<h:selectOneMenu value="#{homeController.tipoFiltro}">
+						<f:selectItem itemValue="1" itemLabel="Descrição" />
+						<f:selectItem itemValue="2" itemLabel="Tamanho" />
+					</h:selectOneMenu>
 
-			<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
-				var="obj">
+					<h:inputText value="#{homeController.filtro}" />
 
-				<h:column>
-					<f:facet name="header">Descrição</f:facet>
-					<hr />
-					<h:outputLabel value="#{obj.descricao}" />
+					<h:commandButton value="Pesquisar"
+						actionListener="#{homeController.pesquisar}" />
 					<span style="opacity: 0;">This sentence is invisible</span>
-				</h:column>
 
-				<h:column>
-					<f:facet name="header">Preço</f:facet>
-					<hr />
-					<h:outputLabel value="#{obj.preco}" />
-					<span style="opacity: 0;">This sentence is invisible</span>
-				</h:column>
+				</h:panelGrid>
+			</h:form>
 
-				<h:column>
-					<f:facet name="header">Tamanho</f:facet>
-					<hr />
-					<h:outputLabel value="#{obj.tamanho}" />
-					<span style="opacity: 0;">This sentence is invisible</span>
-				</h:column>
+			<hr />
 
-				<h:column>
-					<f:facet name="header">Estoque</f:facet>
-					<hr />
-					<h:outputLabel value="#{obj.estoque}" />
-					<span style="opacity: 0;">This sentence is invisible</span>
-				</h:column>
+			<h:form id="formDataTable">
 
-				<h:column
-					rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
-					<f:facet name="header">Ação</f:facet>
-					<hr />
-					<h:commandButton value="Alterar"
-						actionListener="#{cadastroRoupaController.editar(obj)}">
-						<f:ajax render="@all" execute="@this" />
-					</h:commandButton>
-				</h:column>
+				<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
+					var="obj">
 
-			</h:dataTable>
+					<h:column>
+						<f:facet name="header">Descrição</f:facet>
+						<hr />
+						<h:outputLabel value="#{obj.descricao}" />
+						<span style="opacity: 0;">This sentence is invisible</span>
+					</h:column>
 
-		</h:form>
+					<h:column>
+						<f:facet name="header">Preço</f:facet>
+						<hr />
+						<h:outputLabel value="#{obj.preco}" />
+						<span style="opacity: 0;">This sentence is invisible</span>
+					</h:column>
 
-		<hr />
+					<h:column>
+						<f:facet name="header">Tamanho</f:facet>
+						<hr />
+						<h:outputLabel value="#{obj.tamanho}" />
+						<span style="opacity: 0;">This sentence is invisible</span>
+					</h:column>
 
+					<h:column>
+						<f:facet name="header">Estoque</f:facet>
+						<hr />
+						<h:outputLabel value="#{obj.estoque}" />
+						<span style="opacity: 0;">This sentence is invisible</span>
+					</h:column>
+
+					<h:column
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
+						<f:facet name="header">Ação</f:facet>
+						<hr />
+						<h:commandButton value="Alterar"
+							actionListener="#{cadastroRoupaController.editar(obj)}">
+							<f:ajax render="@all" execute="@this" />
+						</h:commandButton>
+					</h:column>
+
+				</h:dataTable>
+
+			</h:form>
+
+			<hr />
+			</center>
 	</ui:define>
 </ui:composition>
 </html>

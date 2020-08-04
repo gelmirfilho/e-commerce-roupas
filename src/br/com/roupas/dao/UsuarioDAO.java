@@ -212,7 +212,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		}
 		return usuario;
 	}
-
+	
 	public Usuario verificarLoginSenha(String email, String senha) {
 		Usuario usuario = null;
 		Connection conn = getConnection();

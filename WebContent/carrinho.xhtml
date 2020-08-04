@@ -6,13 +6,11 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-
-
 		<center>
 			<h1>Carrinho</h1>
-			<span style="opacity: 0;">This sentence is invisible</span>
-
-			<h:form>
+			<h:outputLabel rendered="#{homeController.tamanhoCarrinho() == 0}"
+						value="Seu carrinho está vázio!" />
+			<h:form rendered="#{homeController.tamanhoCarrinho() > 0}">
 					<h:messages errorStyle="color:red" warnStyle="color:orange"
 					infoStyle="color:green" globalOnly="true" />
 
