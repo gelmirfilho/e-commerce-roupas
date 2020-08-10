@@ -213,6 +213,98 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return usuario;
 	}
 	
+	public List<Usuario> findByNome(String nome) {
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		Connection conn = getConnection();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append(" 	id, email, cpf, nome, sobrenome, datadenascimento, senha, telefone, tipodeusuario ");
+		sql.append("FROM ");
+		sql.append("	login ");
+		sql.append("WHERE ");
+		sql.append("	nome ilike ? ");
+		sql.append("ORDER BY nome ");
+		
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setString(1, "%" + nome  + "%");
+			
+			ResultSet rs = stat.executeQuery();
+			
+			Usuario usuario = null;
+			
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setCpf(rs.getString("cpf"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setDataNascimento(rs.getDate("datadenascimento").toLocalDate());
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setTelefone(rs.getString("telefone"));
+				usuario.setTipoUsuario(TipoUsuario.valueOf(rs.getInt("tipodeusuario")));
+				listaUsuario.add(usuario);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return listaUsuario;
+	}
+	
+	public List<Usuario> findByCpf(String nome) {
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		Connection conn = getConnection();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append(" 	id, email, cpf, nome, sobrenome, datadenascimento, senha, telefone, tipodeusuario ");
+		sql.append("FROM ");
+		sql.append("	login ");
+		sql.append("WHERE ");
+		sql.append("	cpf ilike ? ");
+		sql.append("ORDER BY cpf ");
+		
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setString(1, "%" + nome  + "%");
+			
+			ResultSet rs = stat.executeQuery();
+			
+			Usuario usuario = null;
+			
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setCpf(rs.getString("cpf"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setDataNascimento(rs.getDate("datadenascimento").toLocalDate());
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setTelefone(rs.getString("telefone"));
+				usuario.setTipoUsuario(TipoUsuario.valueOf(rs.getInt("tipodeusuario")));
+				listaUsuario.add(usuario);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return listaUsuario;
+	}	
+	
 	public Usuario verificarLoginSenha(String email, String senha) {
 		Usuario usuario = null;
 		Connection conn = getConnection();

@@ -43,8 +43,17 @@ public class CarrinhoController implements Serializable{
 		return venda;
 	}
 	
-	public void remover(int idProduto) {
-		// alunos vao implementar
+	public void remover(int idProduto) throws IOException {
+		//buscando o carrinho da sessao
+		List<ItemVenda> carrinho = (ArrayList<ItemVenda>)  Session.getInstance().getAttribute("carrinho");
+		
+		//removendo o item do carrinho local
+		carrinho.remove(carrinho.get(idProduto));
+		
+		//atualizando o carrinho da sessao
+		Session.getInstance().setAttribute("carrinho", carrinho);
+		
+		reload();
 	}
 	
 	public void finalizar() throws IOException {
@@ -71,8 +80,7 @@ public class CarrinhoController implements Serializable{
 		reload();
 	}
 
-	public void setVenda(Venda venda) {
-		
+	public void setVenda(Venda venda) {	
 		this.venda = venda;
 	}
 	

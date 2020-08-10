@@ -38,7 +38,7 @@ public class Venda extends Entity<Venda>{
 		this.listaItemVenda = listaItemVenda;
 	}
 
-	public Float getTotalVenda() {
+	public Float getTotalVenda() {	
 		return totalVenda;
 	}
 

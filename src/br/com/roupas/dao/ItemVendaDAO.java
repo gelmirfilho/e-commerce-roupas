@@ -127,5 +127,47 @@ public boolean create(ItemVenda itemVenda) {
 		}
 		return listaItemVenda;
 	}
+	
+	public float findPrecoVenda(Venda venda) {
+		Connection conn = getConnection();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append("  v.id, ");
+		sql.append("  v.valor, ");
+		sql.append("  v.idroupa, ");
+		sql.append("  r.descricao, ");
+		sql.append("  r.tamanho, ");
+		sql.append("  r.preco, ");
+		sql.append("  r.estoque ");
+		sql.append("FROM ");
+		sql.append("  public.itemvenda v, ");
+		sql.append("  public.roupa r ");
+		sql.append("WHERE ");
+		sql.append("  v.idroupa = r.id AND ");
+		sql.append("  v.idvenda = ? ");
+		
+		PreparedStatement stat = null;
+		float total = 0;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setInt(1, venda.getId());
+			
+			ResultSet rs = stat.executeQuery();			
+			
+			while(rs.next()) {
+				ItemVenda item = new ItemVenda();
+				item.setId(rs.getInt("id"));
+				total = total + (rs.getFloat("valor"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return total;
+	}
 
 }

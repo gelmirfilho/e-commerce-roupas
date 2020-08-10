@@ -10,81 +10,51 @@
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="false" />
 
-
-			<h1>.:Gerenciador de Roupas:.</h1>
+			<h1>.:Gerenciador de roupa:.</h1>
 			<h1>Somente pessoas autorizadas</h1>
-
-			<hr />
-
 			<h:form>
 				<h:panelGrid columns="5">
-
-					<h2>Pesquisar por:</h2>
-
-					<h:selectOneMenu value="#{homeController.tipoFiltro}">
+					<h:selectOneMenu value="#{consultaRoupaController.tipoFiltro}">
 						<f:selectItem itemValue="1" itemLabel="Descrição" />
 						<f:selectItem itemValue="2" itemLabel="Tamanho" />
 					</h:selectOneMenu>
-
-					<h:inputText value="#{homeController.filtro}" />
-
+					<h:panelGroup>
+						<h:inputText value="#{consultaRoupaController.filtro}" />
+					</h:panelGroup>
 					<h:commandButton value="Pesquisar"
-						actionListener="#{homeController.pesquisar}" />
-					<span style="opacity: 0;">This sentence is invisible</span>
+						actionListener="#{consultaRoupaController.pesquisar}" />
+					<h:commandButton value="+ Nova Roupa"
+						action="#{consultaRoupaController.novaRoupa}" />
 
 				</h:panelGrid>
+
 			</h:form>
-
-			<hr />
-
 			<h:form id="formDataTable">
-
-				<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
-					var="obj">
-
+				<h:dataTable id="dataTable"
+					value="#{consultaRoupaController.listaRoupa}" var="obj">
 					<h:column>
 						<f:facet name="header">Descrição</f:facet>
-						<hr />
 						<h:outputLabel value="#{obj.descricao}" />
-						<span style="opacity: 0;">This sentence is invisible</span>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Preço</f:facet>
-						<hr />
 						<h:outputLabel value="#{obj.preco}" />
-						<span style="opacity: 0;">This sentence is invisible</span>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Tamanho</f:facet>
-						<hr />
 						<h:outputLabel value="#{obj.tamanho}" />
-						<span style="opacity: 0;">This sentence is invisible</span>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Estoque</f:facet>
-						<hr />
 						<h:outputLabel value="#{obj.estoque}" />
-						<span style="opacity: 0;">This sentence is invisible</span>
 					</h:column>
-
-					<h:column
-						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
+					<h:column>
 						<f:facet name="header">Ação</f:facet>
-						<hr />
-						<h:commandButton value="Alterar"
-							actionListener="#{cadastroRoupaController.editar(obj)}">
-							<f:ajax render="@all" execute="@this" />
-						</h:commandButton>
+						<h:commandLink value="Editar"
+							action="#{consultaRoupaController.editar(obj)}" />
 					</h:column>
-
 				</h:dataTable>
-
 			</h:form>
-
-			<hr />
 			</center>
 	</ui:define>
 </ui:composition>

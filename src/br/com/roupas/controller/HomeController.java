@@ -63,9 +63,9 @@ public class HomeController implements Serializable {
 		this.listaRoupa = listaRoupa;
 	}
 
-	public void adicionar(int idLivro) {
+	public void adicionar(int idRoupa) {
 		RoupaDAO dao = new RoupaDAO();
-		Roupa Livro = dao.findById(idLivro);
+		Roupa Roupa = dao.findById(idRoupa);
 		// verifica se existe um carrinho na sessao
 		if (Session.getInstance().getAttribute("carrinho") == null) {
 			// adiciona um carrinho (de itens de venda) na sessao
@@ -77,8 +77,8 @@ public class HomeController implements Serializable {
 
 		// criando um item de venda para adicionar no carrinho
 		ItemVenda item = new ItemVenda();
-		item.setRoupa(Livro);
-		item.setValor(Livro.getPreco());
+		item.setRoupa(Roupa);
+		item.setValor(Roupa.getPreco());
 
 		// adicionando o item no carrinho (variavel local)
 		carrinho.add(item);

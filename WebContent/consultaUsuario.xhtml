@@ -1,24 +1,37 @@
-<!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-	<center>
-		<h:body>
+		<center>
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
-				infoStyle="color:black" globalOnly="true" />
+				infoStyle="color:green" globalOnly="false" />
+			<h1>.:Gerenciador de usuario:.</h1>
+			<h1>Somente pessoas autorizadas</h1>
+			<h:form>
+				<h:panelGrid columns="5">
+					<h:selectOneMenu value="#{consultaUsuarioController.tipoFiltro}">
+						<f:selectItem itemValue="1" itemLabel="Nome" />
+						<f:selectItem itemValue="2" itemLabel="Cpf" />
+					</h:selectOneMenu>
+					<h:panelGroup>
+						<h:inputText value="#{consultaUsuarioController.filtro}" />
+					</h:panelGroup>
+					<h:commandButton value="Pesquisar"
+						actionListener="#{consultaUsuarioController.pesquisar}" />
+					<h:commandButton value="+ Novo Usuario"
+						action="#{consultaUsuarioController.novoUsuario}" />
 
-			<h1 class="col-auto">.:Gerenciador sua conta:.</h1>
-		
-			<hr />
+				</h:panelGrid>
 
-			<h:form id="formDataTable"
-				class="col-form-label-lg form-control-plaintext">
-				
+			</h:form>
+
+			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
-					value="#{templateController.usuarioLogado}" var="obj">
+					value="#{consultaUsuarioController.listaUsuario}" var="obj">
 
 					<h:column>
 						<f:facet name="header">Email</f:facet>
@@ -53,16 +66,18 @@
 					</h:column>
 
 					<h:column>
+						<f:facet name="header">Tipo de Usuário</f:facet>
+						<h:outputLabel value="#{obj.tipoUsuario.label}" />
+					</h:column>
+
+					<h:column>
 						<f:facet name="header">Ação</f:facet>
-						<h:commandLink value="Alterar dados"
+						<h:commandLink value="Editar"
 							action="#{consultaUsuarioController.editar(obj)}" />
 					</h:column>
 
 				</h:dataTable>
-
 			</h:form>
-			<hr />
-		</h:body>
 		</center>
 	</ui:define>
 </ui:composition>

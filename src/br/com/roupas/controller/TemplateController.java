@@ -20,7 +20,8 @@ public class TemplateController extends UsuarioDAO implements Serializable {
 	public Usuario getUsuarioLogado() {
 		if (usuarioLogado == null) { // buscando o usuario da sessao
 			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
-			//usuarioLogado = findById(usuarioLogado.getId());
+			if(usuarioLogado!=null)
+					usuarioLogado = findById(usuarioLogado.getId());
 		}
 		return usuarioLogado;
 	}

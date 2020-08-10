@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<center>
+
+			<h:messages errorStyle="color:red" warnStyle="color:orange"
+				infoStyle="color:black" globalOnly="true" />
+			<h1>.:Cadastro de Usuario:.</h1>
+			<h:form>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="Email:" />
+					<h:panelGroup>
+						<h:inputText id="itEmail" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroUsuarioController.entity.email}" />
+						<h:message for="itEmail" style="color:red" />
+					</h:panelGroup>
+
+
+					<h:outputLabel value="Cpf:" />
+					<h:panelGroup>
+						<h:inputText id="itCpf" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroUsuarioController.entity.cpf}" />
+						<h:message for="itCpf" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Nome:" />
+					<h:panelGroup>
+						<h:inputText id="itNome" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroUsuarioController.entity.nome}" />
+						<h:message for="itNome" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Sobrenome:" />
+					<h:panelGroup>
+						<h:inputText id="itSobrenome" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroUsuarioController.entity.sobrenome}" />
+						<h:message for="itSobrenome" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Data de Nascimento:" />
+					<h:panelGroup>
+						<h:inputText id="itDataNascimento"
+							value="#{cadastroUsuarioController.entity.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+						</h:inputText>
+						<h:message for="itDataNascimento" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Senha:" />
+					<h:panelGroup>
+						<h:inputSecret id="itSenha"
+							value="#{cadastroUsuarioController.entity.senha}" required="true"
+							requiredMessage="Esse campo não pode ser nulo." />
+						<h:message for="itSenha" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Telefone:" />
+					<h:panelGroup>
+						<h:inputText id="itTelefone"
+							value="#{cadastroUsuarioController.entity.telefone}"
+							required="true" requiredMessage="Esse campo não pode ser nulo." />
+						<h:message for="itTelefone" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Tipo de Usuário:" rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"/>
+					<h:selectOneMenu rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
+						value="#{cadastroUsuarioController.entity.tipoUsuario}">
+						<f:selectItems rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
+							value="#{cadastroUsuarioController.listaTipoUsuario}" var="tipo"
+							itemLabel="#{tipo.label}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+				<h:commandButton value="Incluir"
+					rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
+					disabled="#{cadastroUsuarioController.entity.id != null}"
+					actionListener="#{cadastroUsuarioController.incluir}" />
+				<h:commandButton value="Alterar"
+					disabled="#{cadastroUsuarioController.entity.id == null}"
+					actionListener="#{cadastroUsuarioController.alterar}" />
+				<h:commandButton value="Excluir Conta Permanentemente"
+					disabled="#{cadastroUsuarioController.entity.id == null}"
+					actionListener="#{cadastroUsuarioController.remover}">
+					<f:ajax execute="@this" render="@form formDataTable" />
+				</h:commandButton>
+				<h:commandButton value="Limpar"
+					rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
+					actionListener="#{cadastroUsuarioController.limpar}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:form>
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

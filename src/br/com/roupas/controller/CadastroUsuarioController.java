@@ -1,16 +1,12 @@
 package br.com.roupas.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-
 import br.com.roupas.application.Util;
 import br.com.roupas.dao.UsuarioDAO;
 import br.com.roupas.model.TipoUsuario;
@@ -18,13 +14,13 @@ import br.com.roupas.model.Usuario;
 
 @Named
 @ViewScoped
-public class CadastroAdministradorController extends Controller<Usuario> implements Serializable {
+public class CadastroUsuarioController extends Controller<Usuario>  implements Serializable {
 
 	private static final long serialVersionUID = -563227102506849534L;
 
 	private List<Usuario> listaUsuario;
 	
-	public CadastroAdministradorController() {
+	public CadastroUsuarioController() {
 		super(new UsuarioDAO());
 		Flash flash = FacesContext.getCurrentInstance().
 				getExternalContext().getFlash();
@@ -83,8 +79,4 @@ public class CadastroAdministradorController extends Controller<Usuario> impleme
 		}
 	}
 
-	public void reload() throws IOException {
-	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-	}
 }

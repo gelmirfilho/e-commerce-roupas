@@ -236,6 +236,10 @@ public class VendaDAO extends DAO<Venda> {
 				// e os itens de venda?!!?
 				ItemVendaDAO dao = new ItemVendaDAO();
 				venda.setListaItemVenda(dao.findByVenda(venda));
+				
+				//
+				venda.setTotalVenda(dao.findPrecoVenda(venda));
+				
 				listaVenda.add(venda);
 			}
 

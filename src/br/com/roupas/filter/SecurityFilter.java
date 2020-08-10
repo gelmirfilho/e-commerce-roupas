@@ -31,7 +31,7 @@ public class SecurityFilter implements Filter {
 		// imprime o endereco da pagina
 		String endereco = servletRequest.getRequestURI();
 		System.out.println(endereco);
-		
+
 		if (endereco.equals("/roupas/faces/login.xhtml") || endereco.equals("/roupas/faces/cadastroCliente.xhtml")
 				|| endereco.equals("/roupas/faces/home.xhtml")) {
 			chain.doFilter(request, response);
@@ -45,7 +45,7 @@ public class SecurityFilter implements Filter {
 		if (session != null) {
 			usuario = (Usuario) session.getAttribute("usuarioLogado");
 		}
-		
+
 		if (usuario == null) {
 			((HttpServletResponse) response).sendRedirect("/roupas/faces/login.xhtml");
 		} else {
@@ -55,7 +55,11 @@ public class SecurityFilter implements Filter {
 			}
 
 			if (usuario.getTipoUsuario() == TipoUsuario.CLIENTE) {
-				if (endereco.equals("/roupas/faces/cadastroAdministrador.xhtml")) {
+				if (endereco.equals("/roupas/faces/cadastroAdministrador.xhtml")
+						|| endereco.equals("/roupas/faces/consultaRoupa.xhtml")
+						|| endereco.equals("/roupas/faces/cadastroUsuario.xhtml")
+						|| endereco.equals("/roupas/faces/consultaUsuario.xhtml")
+						|| endereco.equals("/roupas/faces/roupa.xhtml")) {
 					((HttpServletResponse) response).sendRedirect("/roupas/faces/home.xhtml");
 				}
 			}
@@ -65,7 +69,7 @@ public class SecurityFilter implements Filter {
 					((HttpServletResponse) response).sendRedirect("/roupas/faces/home.xhtml");
 				}
 			}
-			
+
 			// segue o fluxo
 			chain.doFilter(request, response);
 			return;

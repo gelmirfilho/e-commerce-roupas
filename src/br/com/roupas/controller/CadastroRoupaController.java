@@ -3,7 +3,6 @@ package br.com.roupas.controller;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -41,18 +40,13 @@ public class CadastroRoupaController extends Controller<Roupa>  implements Seria
 		if (validarDados()) {
 			if (dao.update(getEntity())) {
 				limpar();
-				try {
-					reload();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Util.addInfoMessage("Alteração realizada com sucesso.");
 			} else {
 				Util.addInfoMessage("Erro ao alterar no banco de dados.");
 			}
 		}
 	}
-	
+		
 	public void reload() throws IOException {
 	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
