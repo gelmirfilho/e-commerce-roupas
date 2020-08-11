@@ -10,51 +10,47 @@
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="false" />
 
-			<h1>.:Gerenciador de Cartão:.</h1>
+			<h1>.:Gerenciador de Cartao:.</h1>
 			<h:form>
 				<h:panelGrid columns="5">
-					<h:selectOneMenu value="#{consultaRoupaController.tipoFiltro}">
+					<h:selectOneMenu value="#{consultaCartaoController.tipoFiltro}">
 						<f:selectItem itemValue="1" itemLabel="Descrição" />
 						<f:selectItem itemValue="2" itemLabel="Tamanho" />
 					</h:selectOneMenu>
 					<h:panelGroup>
-						<h:inputText value="#{consultaRoupaController.filtro}" />
+						<h:inputText value="#{consultaCartaoController.filtro}" />
 					</h:panelGroup>
 					<h:commandButton value="Pesquisar"
-						actionListener="#{consultaRoupaController.pesquisar}" />
-					<h:commandButton value="+ Nova Roupa"
-						action="#{consultaRoupaController.novaRoupa}" />
+						actionListener="#{consultaCartaoController.pesquisar}" />
+					<h:commandButton value="+ Novo Cartão"
+						action="#{consultaCartaoController.novoCartao}" />
 
 				</h:panelGrid>
 
 			</h:form>
 			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
-					value="#{consultaRoupaController.listaRoupa}" var="obj">
+					value="#{consultaCartaoController.listaCartao}" var="obj">
 					<h:column>
-						<f:facet name="header">Descrição</f:facet>
-						<h:outputLabel value="#{obj.descricao}" />
+						<f:facet name="header">Número do Cartão</f:facet>
+						<h:outputLabel value="#{obj.numero}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header">Preço</f:facet>
-						<h:outputLabel value="#{obj.preco}" />
+						<f:facet name="header">Data de Validade</f:facet>
+						<h:outputLabel value="#{obj.validade}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header">Tamanho</f:facet>
-						<h:outputLabel value="#{obj.tamanho}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Estoque</f:facet>
-						<h:outputLabel value="#{obj.estoque}" />
+						<f:facet name="header">Código Segurança</f:facet>
+						<h:outputLabel value="#{obj.cvv}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">Ação</f:facet>
 						<h:commandButton value="Editar"
-							action="#{consultaRoupaController.editar(obj)}" />
+							action="#{consultaCartaoController.editar(obj)}" />
 					</h:column>
 				</h:dataTable>
 			</h:form>
-			</center>
+		</center>
 	</ui:define>
 </ui:composition>
 </html>

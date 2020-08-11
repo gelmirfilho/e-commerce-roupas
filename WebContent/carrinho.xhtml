@@ -7,53 +7,61 @@
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
 		<center>
-			<h1>Carrinho</h1>
-			<h:outputLabel rendered="#{homeController.tamanhoCarrinho() == 0}"
-						value="Seu carrinho está vázio!" />
-			<h:form rendered="#{homeController.tamanhoCarrinho() > 0}">
+			<h:body>
+				<h1>Carrinho</h1>
+
+				<h:outputLabel rendered="#{homeController.tamanhoCarrinho() == 0}"
+					value="Seu carrinho está vázio!" />
+
+				<h:form id="formDataTable"
+					rendered="#{homeController.tamanhoCarrinho() > 0}">
+
 					<h:messages errorStyle="color:red" warnStyle="color:orange"
-					infoStyle="color:green" globalOnly="true" />
+						infoStyle="color:green" globalOnly="true" />
 
-				<h:dataTable value="#{carrinhoController.venda.listaItemVenda}"
-					var="obj">
+					<h:dataTable id="dataTable"
+						value="#{carrinhoController.venda.listaItemVenda}" var="obj">
 
-					<h:column>
-						<f:facet name="header">Descrição</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.roupa.descricao}" />
-						<span style="opacity: 0;">This sentence is invisible</span>
-					</h:column>
-
-					<h:column>
-						<f:attribute name="width" value="20%" />
-
-						<f:facet name="header">Preço</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.valor}">
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							<hr />
+							<h:outputLabel value="#{obj.roupa.descricao}" />
 							<span style="opacity: 0;">This sentence is invisible</span>
-							<f:convertNumber locale="pt_BR" currencySymbol="R$"
-								type="currency" />
-						</h:outputLabel>
-					</h:column>
+						</h:column>
 
-					<h:column>
-						<f:attribute name="width" value="20%" />
-						<f:facet name="header">Ação</f:facet>
-						<hr />
-						<h:commandButton value="Remover do Carrinho"
-							actionListener="#{carrinhoController.remover(obj.id)}">
-							<f:ajax render="@form" execute="@this" />
-						</h:commandButton>
-					</h:column>
+						<h:column>
+							<f:attribute name="width" value="20%" />
 
-				</h:dataTable>
+							<f:facet name="header">Preço</f:facet>
+							<hr />
+							<h:outputLabel value="#{obj.valor}">
+								<span style="opacity: 0;">This sentence is invisible</span>
+								<f:convertNumber locale="pt_BR" currencySymbol="R$"
+									type="currency" />
+							</h:outputLabel>
+						</h:column>
 
-				<h:commandButton value="Finalizar Venda"
-					actionListener="#{carrinhoController.finalizar}">
-					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+						<h:column>
+							<f:attribute name="width" value="20%" />
+							<f:facet name="header">Ação</f:facet>
+							<hr />
 
-			</h:form>
+							<h:commandButton value="Remover do Carrinho"
+								actionListener="#{carrinhoController.remover(obj.id)}">
+								<f:ajax render="@form" execute="@this" />
+							</h:commandButton>
+
+						</h:column>
+
+					</h:dataTable>
+
+					<h:commandButton value="Finalizar Venda"
+						actionListener="#{carrinhoController.finalizar}">
+						<f:ajax execute="@form" render="@form" />
+					</h:commandButton>
+
+				</h:form>
+			</h:body>
 		</center>
 	</ui:define>
 </ui:composition>

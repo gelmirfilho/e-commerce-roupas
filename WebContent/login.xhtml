@@ -6,41 +6,43 @@
 
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-		<h:body>
-			<h:messages id="messages" errorStyle="color:red"
-				warnStyle="color:orange" infoStyle="color:green" globalOnly="true" />
-			
-			<h1>.:Acesso:.</h1>
-			<h:form>
-				<h:panelGrid columns="2">
+		<center>
+			<h:body>
+				<h:messages id="messages" errorStyle="color:red"
+					warnStyle="color:orange" infoStyle="color:green" globalOnly="true" />
 
-					<h:outputLabel value="Email:" />
-					<h:inputText value="#{loginController.usuario.email}" />
+				<h1>.:Acesso:.</h1>
+				<h:form>
+					<h:panelGrid columns="2">
 
-					<h:outputLabel value="Senha:" />
-					<h:panelGroup>
-						<h:inputSecret id="isSenha"
-							value="#{loginController.usuario.senha}" required="true"
-							requiredMessage="Esse campo não pode ser nulo." />
-						<h:message for="isSenha" style="color:red" />
-					</h:panelGroup>
+						<h:outputLabel value="Email:" />
+						<h:inputText value="#{loginController.usuario.email}" />
 
-				</h:panelGrid>
-				<h:commandButton value="Entrar" action="#{loginController.logar}">
-					<f:ajax execute="@form" render="@form messages" />
-				</h:commandButton>
+						<h:outputLabel value="Senha:" />
+						<h:panelGroup>
+							<h:inputSecret id="isSenha"
+								value="#{loginController.usuario.senha}" required="true"
+								requiredMessage="Esse campo não pode ser nulo." />
+							<h:message for="isSenha" style="color:red" />
+						</h:panelGroup>
 
-				<h:commandButton value="Limpar"
-					actionListener="#{loginController.limpar}">
-					<f:ajax execute="@this" render="@form messages" />
-				</h:commandButton>
+					</h:panelGrid>
+					<h:commandButton value="Entrar" action="#{loginController.logar}">
+						<f:ajax execute="@form" render="@form messages" />
+					</h:commandButton>
 
-				<h:commandButton value="Criar conta"
-					action="cadastroCliente.xhtml?faces-redirect=true">
-					<f:ajax execute="@this" render="@form messages" />
-				</h:commandButton>
-			</h:form>
-		</h:body>
+					<h:commandButton value="Limpar"
+						actionListener="#{loginController.limpar}">
+						<f:ajax execute="@this" render="@form messages" />
+					</h:commandButton>
+
+					<h:commandButton value="Criar conta"
+						action="cadastroCliente.xhtml?faces-redirect=true">
+						<f:ajax execute="@this" render="@form messages" />
+					</h:commandButton>
+				</h:form>
+			</h:body>
+		</center>
 	</ui:define>
 </ui:composition>
 </html>

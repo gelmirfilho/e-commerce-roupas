@@ -29,7 +29,7 @@ public abstract class Controller <T extends Entity<T>> implements Serializable {
 				limpar();
 				Util.addInfoMessage("Inclusão realizada com sucesso.");
 			} else {
-				Util.addInfoMessage("Erro ao incluir no banco de dados.");
+				Util.addErrorMessage("Erro ao incluir no banco de dados.");
 			}
 		}
 	}

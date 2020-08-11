@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+
+		<center>
+			<h:messages errorStyle="color:red" warnStyle="color:orange"
+				infoStyle="color:black" globalOnly="true" />
+			<h1>.:Cadastro de Cartão:.</h1>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Número do Cartão:" />
+					<h:panelGroup>
+						<h:inputText id="itNumero" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroCartaoController.entity.numero}" />
+						<h:message for="itNumero" style="color:red" />
+					</h:panelGroup>
+					
+					<h:outputLabel value="Data de Validade:" />
+					<h:panelGroup>
+						<h:inputText id="itDataValidade"
+							value="#{cadastroCartaoController.entity.validade}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+						</h:inputText>
+						<h:message for="itDataValidade" style="color:red" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Código Segurança:" />
+					<h:panelGroup>
+						<h:inputText id="itCvv" required="true"
+							requiredMessage="Esse campo não pode ser nulo."
+							value="#{cadastroCartaoController.entity.cvv}" />
+						<h:message for="itCvv" style="color:red" />
+					</h:panelGroup>
+
+				</h:panelGrid>
+				<h:commandButton value="Incluir"
+					disabled="#{cadastroCartaoController.entity.id != null}"
+					actionListener="#{cadastroCartaoController.incluir}" />
+				<h:commandButton value="Alterar"
+					disabled="#{cadastroCartaoController.entity.id == null}"
+					actionListener="#{cadastroCartaoController.alterar}" />
+				<h:commandButton value="Excluir"
+					disabled="#{cadastroCartaoController.entity.id == null}"
+					actionListener="#{cadastroCartaoController.remover}">
+					<f:ajax execute="@this" render="@form formDataTable" />
+				</h:commandButton>
+				<h:commandButton value="Limpar"
+					actionListener="#{cadastroCartaoController.limpar}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:form>
+		</center>
+	</ui:define>
+</ui:composition>
+</html>

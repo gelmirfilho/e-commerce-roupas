@@ -94,6 +94,11 @@
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}" />
 					<br />
 					<hr />
+					<h:commandLink style="color:black;" value="Alterar Dados do Cartão"
+						action="consultaCartao.xhtml?faces-redirect=true"
+						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}" />
+					<br />
+					<hr />
 					<h:commandLink style="color:black;" value="Gerenciador de Usuários"
 						rendered="#{templateController.usuarioLogado.tipoUsuario.id > 1}"
 						action="consultaUsuario.xhtml?faces-redirect=true" />

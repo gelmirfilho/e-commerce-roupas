@@ -61,8 +61,13 @@
 						<f:facet name="header">Ação</f:facet>
 						<hr />
 						<h:commandButton value="Adicionar Carrinho"
+							rendered="#{obj.estoque > 0}"
 							actionListener="#{homeController.adicionar(obj.id)}">
 							<f:ajax render="@all" execute="@this" />
+						</h:commandButton>
+						
+						<h:commandButton value="Produto sem estoque"
+							rendered="#{0 >= obj.estoque}">
 						</h:commandButton>
 					</h:column>
 

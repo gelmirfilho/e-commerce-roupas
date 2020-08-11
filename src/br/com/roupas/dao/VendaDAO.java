@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.roupas.model.ItemVenda;
+import br.com.roupas.model.Roupa;
 import br.com.roupas.model.TipoUsuario;
 import br.com.roupas.model.Usuario;
 import br.com.roupas.model.Venda;
@@ -151,8 +152,90 @@ public class VendaDAO extends DAO<Venda> {
 
 	@Override
 	public Venda findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Venda venda = null;
+		Connection conn = getConnection();
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append("  v.id, ");
+		sql.append("  v.data, ");
+		sql.append("  u.idlogin, ");
+		sql.append("  u.email, ");
+		sql.append("  u.cpf, ");
+		sql.append("  u.nome, ");
+		sql.append("  u.sobrenome, ");
+		sql.append("  u.datadenascimento, ");
+		sql.append("  u.senha, ");
+		sql.append("  u.telefone, ");
+		sql.append("  u.tipodeusuario ");
+		sql.append("FROM ");
+		sql.append("  public.venda v, ");
+		sql.append("  public.login u ");
+		sql.append("WHERE ");
+		sql.append("  v.idusuario = u.id AND ");
+		sql.append("  u.id = ? ");
+
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+			while (rs.next()) {
+				venda = new Venda();
+				venda.setId(rs.getInt("id"));
+				venda.setData(rs.getDate("data").toLocalDate());
+				venda.setUsuario(new Usuario());
+				venda.getUsuario().setId(rs.getInt("idusuario"));
+				venda.getUsuario().setEmail(rs.getString("email"));
+				venda.getUsuario().setCpf(rs.getString("cpf"));
+				venda.getUsuario().setNome(rs.getString("nome"));
+				venda.getUsuario().setSobrenome(rs.getString("sobrenome"));
+				Date data = rs.getDate("datadenascimento");
+				venda.getUsuario().setDataNascimento(data == null ? null : data.toLocalDate());
+				venda.getUsuario().setSenha(rs.getString("senha"));
+				venda.getUsuario().setTelefone(rs.getString("telefone"));
+				venda.getUsuario().setTipoUsuario(TipoUsuario.valueOf(rs.getInt("tipodeusuario")));
+
+				venda.getUsuario().setDataNascimento(data == null ? null : data.toLocalDate());
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return venda;
+	}
+
+	private boolean atualizarEstoque(Roupa roupa, Connection conn) {
+
+		boolean retorno = false;
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE roupa SET estoque = estoque -1 ");
+		sql.append("WHERE id = ? AND estoque > 0 ");
+
+		PreparedStatement stat = null;
+
+		try {
+			stat = conn.prepareStatement(sql.toString());
+
+			stat.setInt(1, roupa.getId());
+
+			stat.execute();
+
+			retorno = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+		}
+		return retorno;
+
 	}
 
 	private boolean createItemVenda(ItemVenda itemVenda, Connection conn) {
@@ -175,8 +258,16 @@ public class VendaDAO extends DAO<Venda> {
 			stat.setInt(3, itemVenda.getRoupa().getId());
 			stat.execute();
 
+			if (atualizarEstoque(itemVenda.getRoupa(), conn) == false) {
+				throw new Exception("Erro ao atualizar o estoque");
+			}
+
 			retorno = true;
+
 		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} catch (Exception e) {
 			e.printStackTrace();
 			rollback(conn);
 		} finally {
@@ -236,10 +327,10 @@ public class VendaDAO extends DAO<Venda> {
 				// e os itens de venda?!!?
 				ItemVendaDAO dao = new ItemVendaDAO();
 				venda.setListaItemVenda(dao.findByVenda(venda));
-				
+
 				//
 				venda.setTotalVenda(dao.findPrecoVenda(venda));
-				
+
 				listaVenda.add(venda);
 			}
 
