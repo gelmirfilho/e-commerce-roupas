@@ -1,0 +1,190 @@
+-- Database: roupas
+
+-- DROP DATABASE roupas;
+
+CREATE DATABASE roupas
+    WITH 
+    OWNER = topicos1
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+    
+
+-- Table: public.cartaocredito
+
+-- DROP TABLE public.cartaocredito;
+
+CREATE TABLE public.cartaocredito
+(
+    id integer NOT NULL DEFAULT nextval('cartaocredito_id_seq'::regclass),
+    idusuario integer,
+    validade date,
+    numero character varying(16) COLLATE pg_catalog."default",
+    cvv character varying(3) COLLATE pg_catalog."default",
+    CONSTRAINT cartaocredito_pkey PRIMARY KEY (id),
+    CONSTRAINT cartao_usuario FOREIGN KEY (idusuario)
+        REFERENCES public.login (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.cartaocredito
+    OWNER to topicos1;
+    
+-- SEQUENCE: public.cartaocredito_id_seq
+
+-- DROP SEQUENCE public.cartaocredito_id_seq;
+
+CREATE SEQUENCE public.cartaocredito_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.cartaocredito_id_seq
+    OWNER TO topicos1;
+    
+    
+-- Table: public.itemvenda
+
+-- DROP TABLE public.itemvenda;
+
+CREATE TABLE public.itemvenda
+(
+    id integer NOT NULL DEFAULT nextval('itemvenda_id_seq'::regclass),
+    idroupa integer,
+    valor numeric(10,2),
+    idvenda integer,
+    CONSTRAINT itemvenda_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.itemvenda
+    OWNER to topicos1;
+    
+-- SEQUENCE: public.itemvenda_id_seq
+
+-- DROP SEQUENCE public.itemvenda_id_seq;
+
+CREATE SEQUENCE public.itemvenda_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.itemvenda_id_seq
+    OWNER TO topicos1;
+    
+-- Table: public.login
+
+-- DROP TABLE public.login;
+
+CREATE TABLE public.login
+(
+    id integer NOT NULL DEFAULT nextval('usuario_id_seq'::regclass),
+    email character varying(120) COLLATE pg_catalog."default" NOT NULL,
+    cpf character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    nome character varying(200) COLLATE pg_catalog."default" NOT NULL,
+    sobrenome character varying(200) COLLATE pg_catalog."default" NOT NULL,
+    datadenascimento date NOT NULL,
+    senha character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    telefone character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    tipodeusuario integer,
+    CONSTRAINT usuario_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.login
+    OWNER to topicos1;
+    
+-- SEQUENCE: public.usuario_id_seq
+
+-- DROP SEQUENCE public.usuario_id_seq;
+
+CREATE SEQUENCE public.usuario_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.usuario_id_seq
+    OWNER TO topicos1;
+    
+    
+-- Table: public.roupa
+
+-- DROP TABLE public.roupa;
+
+CREATE TABLE public.roupa
+(
+    id integer NOT NULL DEFAULT nextval('roupa_id_seq'::regclass),
+    descricao character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    tamanho character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    preco real NOT NULL,
+    estoque integer NOT NULL,
+    CONSTRAINT roupa_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.roupa
+    OWNER to topicos1;
+    
+ -- SEQUENCE: public.roupa_id_seq
+
+-- DROP SEQUENCE public.roupa_id_seq;
+
+CREATE SEQUENCE public.roupa_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.roupa_id_seq
+    OWNER TO topicos1;
+    
+ 
+ -- Table: public.venda
+
+-- DROP TABLE public.venda;
+
+CREATE TABLE public.venda
+(
+    id integer NOT NULL DEFAULT nextval('venda_id_seq'::regclass),
+    data date,
+    idusuario integer,
+    CONSTRAINT venda_pkey PRIMARY KEY (id),
+    CONSTRAINT venda_usuario FOREIGN KEY (idusuario)
+        REFERENCES public.login (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.venda
+    OWNER to topicos1;
+    
+-- SEQUENCE: public.venda_id_seq
+
+-- DROP SEQUENCE public.venda_id_seq;
+
+CREATE SEQUENCE public.venda_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.venda_id_seq
+    OWNER TO topicos1;

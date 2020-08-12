@@ -1,0 +1,19 @@
+validações de campo repetido no sistema(email e cpf);
+
+menu com diferentes funções, dependendo do usuario;
+update do usuario da sessão toda vez que altera o usuario da sessão;
+
+usar o flash scoop;
+gerenciamento de filtro entre páginas e permissões de usuarios;
+
+carrinho com contador de itens interativo;
+carrinho com opção de remover itens;
+finaliza a compra atualiza o estoque do produto;
+estoque do item nunca fica negativo;
+
+botão adicionar carrinho se altera para sem estoque quando estoque do produto = 0;
+total de venda é calculada apartir dos itens que possui a venda;
+
+todas as datas e valores formatados;
+
+para remover usuario primeiro remove seu historico de compra e seu cartao;
