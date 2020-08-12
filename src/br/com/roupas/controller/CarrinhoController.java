@@ -43,17 +43,23 @@ public class CarrinhoController implements Serializable{
 		return venda;
 	}
 	
-	public void remover(int idProduto) throws IOException {
+	public void remover(int idDeUmaRoupa) throws IOException {
 		//buscando o carrinho da sessao
 		List<ItemVenda> carrinho = (ArrayList<ItemVenda>)  Session.getInstance().getAttribute("carrinho");
 		
 		//removendo o item do carrinho local
-		carrinho.remove(carrinho.get(idProduto));
+		//procurando o item correspondente no carrinho
+		for (int i = 0; i < carrinho.size(); i++) {
+			if(carrinho.get(i).getRoupa().getId()==idDeUmaRoupa) {
+				carrinho.remove(i);
+				i=carrinho.size()+1;
+			}
+		}
 		
 		//atualizando o carrinho da sessao
 		Session.getInstance().setAttribute("carrinho", carrinho);
 		
-		reload();
+		//reload();
 	}
 	
 	public void finalizar() throws IOException {

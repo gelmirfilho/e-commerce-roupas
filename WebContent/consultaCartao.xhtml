@@ -10,34 +10,22 @@
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="false" />
 
-			<h1>.:Gerenciador de Cartao:.</h1>
-			<h:form>
-				<h:panelGrid columns="5">
-					<h:selectOneMenu value="#{consultaCartaoController.tipoFiltro}">
-						<f:selectItem itemValue="1" itemLabel="Descrição" />
-						<f:selectItem itemValue="2" itemLabel="Tamanho" />
-					</h:selectOneMenu>
-					<h:panelGroup>
-						<h:inputText value="#{consultaCartaoController.filtro}" />
-					</h:panelGroup>
-					<h:commandButton value="Pesquisar"
-						actionListener="#{consultaCartaoController.pesquisar}" />
-					<h:commandButton value="+ Novo Cartão"
-						action="#{consultaCartaoController.novoCartao}" />
+			<h1>.:Gerenciador de Cartão:.</h1>
+			<span style="opacity: 0;">This sentence is invisible</span>
 
-				</h:panelGrid>
-
-			</h:form>
 			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
-					value="#{consultaCartaoController.listaCartao}" var="obj">
+					styleClass="table table-striped table-hover"
+					value="#{consultaCartaoController.cartao}" var="obj">
 					<h:column>
 						<f:facet name="header">Número do Cartão</f:facet>
 						<h:outputLabel value="#{obj.numero}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">Data de Validade</f:facet>
-						<h:outputLabel value="#{obj.validade}" />
+						<h:outputLabel value="#{obj.validade}">
+							<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+						</h:outputLabel>
 					</h:column>
 					<h:column>
 						<f:facet name="header">Código Segurança</f:facet>
@@ -45,11 +33,12 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Ação</f:facet>
-						<h:commandButton value="Editar"
+						<h:commandButton value="Gerenciar Cartão"
 							action="#{consultaCartaoController.editar(obj)}" />
 					</h:column>
 				</h:dataTable>
 			</h:form>
+
 		</center>
 	</ui:define>
 </ui:composition>

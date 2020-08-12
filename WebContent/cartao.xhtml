@@ -8,9 +8,9 @@
 	<ui:define name="conteudo">
 
 		<center>
+			<h1>.:Cadastro de Cartão:.</h1>
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:black" globalOnly="true" />
-			<h1>.:Cadastro de Cartão:.</h1>
 			<h:form>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Número do Cartão:" />
@@ -41,18 +41,17 @@
 				</h:panelGrid>
 				<h:commandButton value="Incluir"
 					disabled="#{cadastroCartaoController.entity.id != null}"
-					actionListener="#{cadastroCartaoController.incluir}" />
+					actionListener="#{cadastroCartaoController.incluir}"
+					action="consultaCartao.xhtml?faces-redirect=true" />
 				<h:commandButton value="Alterar"
 					disabled="#{cadastroCartaoController.entity.id == null}"
+					action="consultaCartao.xhtml?faces-redirect=true"
 					actionListener="#{cadastroCartaoController.alterar}" />
-				<h:commandButton value="Excluir"
+				<h:commandButton value="Excluir Cartão Permanentemente"
 					disabled="#{cadastroCartaoController.entity.id == null}"
-					actionListener="#{cadastroCartaoController.remover}">
+					actionListener="#{cadastroCartaoController.remover}"
+					action="consultaCartao.xhtml?faces-redirect=true">
 					<f:ajax execute="@this" render="@form formDataTable" />
-				</h:commandButton>
-				<h:commandButton value="Limpar"
-					actionListener="#{cadastroCartaoController.limpar}">
-					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:form>
 		</center>

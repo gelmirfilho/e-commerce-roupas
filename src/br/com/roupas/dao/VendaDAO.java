@@ -89,6 +89,38 @@ public class VendaDAO extends DAO<Venda> {
 		return false;
 	}
 
+	public boolean removeHistoricoDoUsuario(int idDoUsuario) {
+		boolean retorno = false;
+		Connection conn = getConnection();
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("DELETE FROM venda ");
+		sql.append("WHERE ");
+		sql.append("	idusuario = ? ");
+
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setInt(1, idDoUsuario);
+
+			stat.execute();
+
+			conn.commit();
+
+			System.out.println("Remoção realizada com sucesso.");
+
+			retorno = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return retorno;
+	}
+
 	@Override
 	public List<Venda> findAll() {
 		List<Venda> listaVenda = new ArrayList<Venda>();

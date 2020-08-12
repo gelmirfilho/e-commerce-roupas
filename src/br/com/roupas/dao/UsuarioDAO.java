@@ -110,6 +110,15 @@ public class UsuarioDAO extends DAO<Usuario> {
 	}
 
 	public boolean delete(int id) {
+		
+		//removendo o historico de venda do usuario
+		VendaDAO venda = new VendaDAO();
+		venda.removeHistoricoDoUsuario(id);
+		
+		//removendo cartao do usuario
+		CartaoDAO cartao = new CartaoDAO();
+		cartao.removeCartaoDoUsuario(id);
+		
 		boolean retorno = false;
 		Connection conn = getConnection();
 

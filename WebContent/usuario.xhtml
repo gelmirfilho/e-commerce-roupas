@@ -90,6 +90,7 @@
 					actionListener="#{cadastroUsuarioController.alterar}" />
 				<h:commandButton value="Excluir Conta Permanentemente"
 					disabled="#{cadastroUsuarioController.entity.id == null}"
+					action="home.xhtml?faces-redirect=true"
 					actionListener="#{cadastroUsuarioController.remover}">
 					<f:ajax execute="@this" render="@form formDataTable" />
 				</h:commandButton>

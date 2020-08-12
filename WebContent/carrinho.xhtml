@@ -20,11 +20,11 @@
 						infoStyle="color:green" globalOnly="true" />
 
 					<h:dataTable id="dataTable"
+						styleClass="table table-striped table-hover"
 						value="#{carrinhoController.venda.listaItemVenda}" var="obj">
 
 						<h:column>
 							<f:facet name="header">Descrição</f:facet>
-							<hr />
 							<h:outputLabel value="#{obj.roupa.descricao}" />
 							<span style="opacity: 0;">This sentence is invisible</span>
 						</h:column>
@@ -33,7 +33,6 @@
 							<f:attribute name="width" value="20%" />
 
 							<f:facet name="header">Preço</f:facet>
-							<hr />
 							<h:outputLabel value="#{obj.valor}">
 								<span style="opacity: 0;">This sentence is invisible</span>
 								<f:convertNumber locale="pt_BR" currencySymbol="R$"
@@ -44,11 +43,10 @@
 						<h:column>
 							<f:attribute name="width" value="20%" />
 							<f:facet name="header">Ação</f:facet>
-							<hr />
 
 							<h:commandButton value="Remover do Carrinho"
-								actionListener="#{carrinhoController.remover(obj.id)}">
-								<f:ajax render="@form" execute="@this" />
+								actionListener="#{carrinhoController.remover(obj.roupa.id)}">
+								<f:ajax render="@all" execute="@this" />
 							</h:commandButton>
 
 						</h:column>

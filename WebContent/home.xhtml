@@ -6,75 +6,78 @@
 
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-		<h:body>
-			<h:messages style="color:black;margin:8px;" />
-			<h:form>
-				<h:panelGrid columns="5">
+		<center>
+			<h:body>
+				<h:messages style="color:black;margin:8px;" />
+				<h1>.:Página Principal:.</h1>
+				<h:form>
+					<h:panelGrid columns="5">
+						<h2>Pesquisar por:</h2>
 
-					<h2>Pesquisar por:</h2> 
+						<h:selectOneMenu value="#{homeController.tipoFiltro}">
+							<f:selectItem itemValue="1" itemLabel="Descrição" />
+							<f:selectItem itemValue="2" itemLabel="Tamanho" />
+						</h:selectOneMenu>
 
-					<h:selectOneMenu value="#{homeController.tipoFiltro}">
-						<f:selectItem itemValue="1" itemLabel="Descrição" />
-						<f:selectItem itemValue="2" itemLabel="Tamanho" />
-					</h:selectOneMenu>
+						<h:inputText value="#{homeController.filtro}" />
 
-					<h:inputText value="#{homeController.filtro}" />
+						<h:commandButton value="Pesquisar"
+							actionListener="#{homeController.pesquisar}" />
+						<span style="opacity: 0;">This sentence is invisible</span>
 
-					<h:commandButton value="Pesquisar"
-						actionListener="#{homeController.pesquisar}" /> <span style="opacity:0;">This sentence is invisible</span> 
+					</h:panelGrid>
+				</h:form>
 
-				</h:panelGrid>
-			</h:form>
-			
-			<hr />
+				<span style="opacity: 0;">This sentence is invisible</span>
 
-			<h:form id="formDataTable">
+				<h:form id="formDataTable">
 
-				<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
-					var="obj">
+					<h:dataTable id="dataTable" value="#{homeController.listaRoupa}"
+						styleClass="table table-striped table-hover" var="obj">
 
-					<h:column>
-						<f:facet name="header">Descrição</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.descricao}" /> <span style="opacity:0;">This sentence is invisible</span> 
-					</h:column>
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							<h:outputLabel value="#{obj.descricao}" />
+							<span style="opacity: 0;">This sentence is invisible</span>
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Preço</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.preco}" /> <span style="opacity:0;">This sentence is invisible</span> 
-					</h:column>
+						<h:column>
+							<f:facet name="header">Preço</f:facet>
+							<h:outputLabel value="#{obj.preco}" />
+							<span style="opacity: 0;">This sentence is invisible</span>
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Tamanho</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.tamanho}" /> <span style="opacity:0;">This sentence is invisible</span> 
-					</h:column>
+						<h:column>
+							<f:facet name="header">Tamanho</f:facet>
+							<h:outputLabel value="#{obj.tamanho}" />
+							<span style="opacity: 0;">This sentence is invisible</span>
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Estoque</f:facet>
-						<hr />
-						<h:outputLabel value="#{obj.estoque}" /> <span style="opacity:0;">This sentence is invisible</span> 
-					</h:column>
+						<h:column>
+							<f:facet name="header">Estoque</f:facet>
+							<h:outputLabel value="#{obj.estoque}" />
+							<span style="opacity: 0;">This sentence is invisible</span>
+						</h:column>
 
-					<h:column rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
-						<f:facet name="header">Ação</f:facet>
-						<hr />
-						<h:commandButton value="Adicionar Carrinho"
-							rendered="#{obj.estoque > 0}"
-							actionListener="#{homeController.adicionar(obj.id)}">
-							<f:ajax render="@all" execute="@this" />
-						</h:commandButton>
-						
-						<h:commandButton value="Produto sem estoque"
-							rendered="#{0 >= obj.estoque}">
-						</h:commandButton>
-					</h:column>
+						<h:column
+							rendered="#{templateController.usuarioLogado.tipoUsuario.id > 0}">
+							<f:facet name="header">Ação</f:facet>
+							<h:commandButton value="Adicionar Carrinho"
+								rendered="#{obj.estoque > 0}"
+								actionListener="#{homeController.adicionar(obj.id)}">
+								<f:ajax render="@all" execute="@this" />
+							</h:commandButton>
 
-				</h:dataTable>
+							<h:commandButton value="Produto sem estoque"
+								rendered="#{0 >= obj.estoque}">
+							</h:commandButton>
+						</h:column>
 
-			</h:form>
-		</h:body>
+					</h:dataTable>
+
+				</h:form>
+			</h:body>
+		</center>
 	</ui:define>
 </ui:composition>
 </html>

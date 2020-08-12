@@ -128,6 +128,39 @@ public class CartaoDAO extends DAO<Cartao> {
 		}
 		return retorno;
 	}
+	
+	public boolean removeCartaoDoUsuario(int idDoUsuario) {
+		boolean retorno = false;
+		Connection conn = getConnection();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("DELETE FROM cartaocredito ");
+		sql.append("WHERE ");
+		sql.append("	idusuario = ? ");
+		
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setInt(1, idDoUsuario);
+			
+			stat.execute();
+			
+			conn.commit();
+
+			System.out.println("Remoção realizada com sucesso.");
+			Util.addInfoMessage("Cartão apagado com sucesso");
+			
+			retorno = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+			closeConnection(conn);
+		}
+		return retorno;
+	}
 
 	@Override
 	public List<Cartao> findAll() {
@@ -256,8 +289,8 @@ public class CartaoDAO extends DAO<Cartao> {
 		return cartao;
 	}
 
-	public List<Cartao> findByUsuario(int idUsuario) {
-		List<Cartao> listaCartao = new ArrayList<Cartao>();
+	public Cartao findByUsuario(int idUsuario) {
+		Cartao listaCartao = new Cartao();
 		Connection conn = getConnection();
 
 		StringBuffer sql = new StringBuffer();
@@ -308,7 +341,7 @@ public class CartaoDAO extends DAO<Cartao> {
 				cartao.getUsuario().setTelefone(rs.getString("telefone"));
 				cartao.getUsuario().setTipoUsuario(TipoUsuario.valueOf(rs.getInt("tipodeusuario")));
 
-				listaCartao.add(cartao);
+				listaCartao=cartao;
 			}
 
 		} catch (SQLException e) {

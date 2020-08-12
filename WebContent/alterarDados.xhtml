@@ -5,64 +5,63 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
-	<center>
-		<h:body>
-			<h:messages errorStyle="color:red" warnStyle="color:orange"
-				infoStyle="color:black" globalOnly="true" />
+		<center>
+			<h:body>
+				<h:messages errorStyle="color:red" warnStyle="color:orange"
+					infoStyle="color:black" globalOnly="true" />
 
-			<h1 class="col-auto">.:Gerenciador sua conta:.</h1>
-		
-			<hr />
+				<h1 class="col-auto">.:Dados da sua conta:.</h1>
+				<span style="opacity: 0;">This sentence is invisible</span>
 
-			<h:form id="formDataTable"
-				class="col-form-label-lg form-control-plaintext">
-				
-				<h:dataTable id="dataTable"
-					value="#{templateController.usuarioLogado}" var="obj">
+				<h:form id="formDataTable"
+					class="col-form-label-lg form-control-plaintext">
 
-					<h:column>
-						<f:facet name="header">Email</f:facet>
-						<h:outputLabel value="#{obj.email}" />
-					</h:column>
+					<h:dataTable id="dataTable"
+						styleClass="table table-striped table-hover"
+						value="#{templateController.usuarioLogado}" var="obj">
 
-					<h:column>
-						<f:facet name="header">Cpf</f:facet>
-						<h:outputLabel value="#{obj.cpf}" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+							<h:outputLabel value="#{obj.email}" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:outputLabel value="#{obj.nome}" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Cpf</f:facet>
+							<h:outputLabel value="#{obj.cpf}" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Sobrenome</f:facet>
-						<h:outputLabel value="#{obj.sobrenome}" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputLabel value="#{obj.nome}" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Data de Nascimento</f:facet>
-						<h:outputLabel value="#{obj.dataNascimento}">
-							<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
-						</h:outputLabel>
-					</h:column>
+						<h:column>
+							<f:facet name="header">Sobrenome</f:facet>
+							<h:outputLabel value="#{obj.sobrenome}" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Telefone</f:facet>
-						<h:outputLabel value="#{obj.telefone}" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Data de Nascimento</f:facet>
+							<h:outputLabel value="#{obj.dataNascimento}">
+								<f:convertDateTime pattern="dd-MM-yyyy" type="localDate" />
+							</h:outputLabel>
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">Ação</f:facet>
-						<h:commandButton value="Alterar dados"
-							action="#{consultaUsuarioController.editar(obj)}" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">Telefone</f:facet>
+							<h:outputLabel value="#{obj.telefone}" />
+						</h:column>
 
-				</h:dataTable>
+						<h:column>
+							<f:facet name="header">Ação</f:facet>
+							<h:commandButton value="Alterar dados"
+								action="#{consultaUsuarioController.editar(obj)}" />
+						</h:column>
 
-			</h:form>
-			<hr />
-		</h:body>
+					</h:dataTable>
+
+				</h:form>
+			</h:body>
 		</center>
 	</ui:define>
 </ui:composition>

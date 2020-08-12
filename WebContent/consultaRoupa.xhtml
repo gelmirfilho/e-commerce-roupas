@@ -10,7 +10,9 @@
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="false" />
 
-			<h1>.:Gerenciador de Cartão:.</h1>
+			<h1>.:Gerenciador de Roupas:.</h1>
+			<h1>Somente Pessoas Autorizadas</h1>
+			<span style="opacity: 0;">This sentence is invisible</span>
 			<h:form>
 				<h:panelGrid columns="5">
 					<h:selectOneMenu value="#{consultaRoupaController.tipoFiltro}">
@@ -30,6 +32,7 @@
 			</h:form>
 			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
+					styleClass="table table-striped table-hover"
 					value="#{consultaRoupaController.listaRoupa}" var="obj">
 					<h:column>
 						<f:facet name="header">Descrição</f:facet>
@@ -54,7 +57,7 @@
 					</h:column>
 				</h:dataTable>
 			</h:form>
-			</center>
+		</center>
 	</ui:define>
 </ui:composition>
 </html>

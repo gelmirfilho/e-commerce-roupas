@@ -9,8 +9,9 @@
 		<center>
 			<h:messages errorStyle="color:red" warnStyle="color:orange"
 				infoStyle="color:green" globalOnly="false" />
-			<h1>.:Gerenciador de usuario:.</h1>
-			<h1>Somente pessoas autorizadas</h1>
+			<h1>.:Gerenciador de Usuário:.</h1>
+			<h1>Somente Pessoas Autorizadas</h1>
+			<span style="opacity: 0;">This sentence is invisible</span>
 			<h:form>
 				<h:panelGrid columns="5">
 					<h:selectOneMenu value="#{consultaUsuarioController.tipoFiltro}">
@@ -31,6 +32,7 @@
 
 			<h:form id="formDataTable">
 				<h:dataTable id="dataTable"
+					styleClass="table table-striped table-hover"
 					value="#{consultaUsuarioController.listaUsuario}" var="obj">
 
 					<h:column>
